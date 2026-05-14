@@ -53,6 +53,7 @@ export interface UserRow {
   role: string;
   status: string;
   classId: string | null;
+  class: { name: string; academicYear: string } | null;
   createdAt: string;
 }
 

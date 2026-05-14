@@ -25,13 +25,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ ses
 
   await logAudit(session.user.id, 'EXAM_SUBMIT', `session:${sessionId}`, { score: updated.score, examId: examSession.examId }, getIp(req));
 
-  await pusherServer.trigger(examChannel(examSession.examId), 'session-submitted', {
+  pusherServer.trigger(examChannel(examSession.examId), 'session-submitted', {
     sessionId,
     userId: session.user.id,
     userName: session.user.name,
     score: updated.score,
     at: updated.submittedAt?.toISOString(),
-  });
+  }).catch(() => {});
 
   return ok({ score: updated.score, submittedAt: updated.submittedAt }, 'Ujian berhasil dikumpulkan');
 }

@@ -46,12 +46,12 @@ export async function POST(req: NextRequest) {
 
   await logAudit(session.user.id, 'EXAM_JOIN', `exam:${exam.id}`, { token: parsed.data.token, sessionId: examSession.id }, getIp(req));
 
-  await pusherServer.trigger(examChannel(exam.id), 'session-joined', {
+  pusherServer.trigger(examChannel(exam.id), 'session-joined', {
     sessionId: examSession.id,
     userId: session.user.id,
     userName: session.user.name,
     at: new Date().toISOString(),
-  });
+  }).catch(() => {});
 
   return ok({ examId: exam.id, sessionId: examSession.id, examTitle: exam.title, subject: exam.subject.name, duration: exam.duration, totalQuestions: exam._count.items });
 }

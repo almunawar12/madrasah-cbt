@@ -232,7 +232,9 @@ export function UsersClient() {
                       </div>
                     </td>
                     <td className="px-6 py-4 text-sm text-on-surface-variant font-mono">{u.nis ?? '—'}</td>
-                    <td className="px-6 py-4 text-sm text-on-surface-variant">{u.classId ?? '—'}</td>
+                    <td className="px-6 py-4 text-sm text-on-surface-variant">
+                      {u.class ? `Kelas ${u.class.name} (${u.class.academicYear})` : u.role !== 'SANTRI' ? u.role === 'GURU' ? 'Guru' : 'Pengawas' : '—'}
+                    </td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${statusBadge(u.status)}`}>{statusLabel(u.status)}</span>
                     </td>

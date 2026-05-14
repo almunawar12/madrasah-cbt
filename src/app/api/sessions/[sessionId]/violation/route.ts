@@ -39,14 +39,14 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ ses
 
   await logAudit(session.user.id, 'VIOLATION', `session:${sessionId}`, { type: parsed.data.type, count: updated.violationCount }, getIp(req));
 
-  await pusherServer.trigger(examChannel(examSession.examId), 'violation', {
+  pusherServer.trigger(examChannel(examSession.examId), 'violation', {
     sessionId,
     userId: session.user.id,
     userName: session.user.name,
     type: parsed.data.type,
     violationCount: updated.violationCount,
     at: new Date().toISOString(),
-  });
+  }).catch(() => {});
 
   return ok({ violationCount: updated.violationCount }, 'Pelanggaran dicatat');
 }

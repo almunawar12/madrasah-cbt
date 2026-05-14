@@ -24,7 +24,10 @@ export async function GET(req: NextRequest) {
       where,
       skip,
       take: limit,
-      select: { id: true, fullName: true, email: true, nis: true, role: true, status: true, classId: true, createdAt: true },
+      select: {
+        id: true, fullName: true, email: true, nis: true, role: true, status: true, classId: true, createdAt: true,
+        class: { select: { name: true, academicYear: true } },
+      },
       orderBy: { createdAt: 'desc' },
     }),
     prisma.user.count({ where }),
