@@ -345,38 +345,57 @@ export default function ExamSessionPage() {
       )}
 
       {/* ── Header ────────────────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-40 flex items-center justify-between w-full px-3 sm:px-5 py-3 bg-surface-container-lowest border-b-2 border-primary/20 shadow-sm gap-2">
-        {/* Left: title */}
-        <div className="flex items-center gap-2 min-w-0">
-          <div className="min-w-0">
-            <p className="text-xs font-bold text-primary truncate leading-none">Sesi Ujian</p>
-            <p className="text-[11px] text-on-surface-variant truncate hidden sm:block">{sessionData.exam.title}</p>
-          </div>
-        </div>
+      <header className="sticky top-0 z-40 w-full bg-surface-container-lowest border-b border-outline-variant/50 shadow-sm">
+        <div className="flex items-center justify-between h-14 sm:h-16 px-4 sm:px-6 gap-3">
 
-        {/* Right: timer + actions */}
-        <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
-          {/* Timer */}
-          <div className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border ${
-            isLowTime ? 'bg-error/10 border-error/30' : 'bg-primary/5 border-primary/20'
-          }`}>
-            <Timer className={`w-4 h-4 ${isLowTime ? 'text-error animate-pulse' : 'text-primary'}`} />
-            <span className={`text-sm font-bold tabular-nums ${isLowTime ? 'text-error' : 'text-primary'}`}>
-              {formatTime(timeLeft)}
-            </span>
+          {/* Left: exam info */}
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <BookOpen className="w-4 h-4 text-primary" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-bold text-on-surface truncate leading-tight">
+                {sessionData.exam.title}
+              </p>
+              <p className="text-xs text-on-surface-variant truncate leading-tight">
+                {sessionData.exam.subject.name}
+              </p>
+            </div>
           </div>
 
-          {/* Fullscreen — hidden on very small screens */}
-          <button onClick={requestFullscreen} title="Fullscreen"
-            className="hidden sm:flex p-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors">
-            <Maximize className="w-4 h-4" />
-          </button>
+          {/* Right: timer + actions */}
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            {/* Timer */}
+            <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border font-bold tabular-nums text-sm ${
+              isLowTime
+                ? 'bg-error/10 border-error/30 text-error'
+                : 'bg-primary/5 border-primary/20 text-primary'
+            }`}>
+              <Timer className={`w-4 h-4 flex-shrink-0 ${isLowTime ? 'animate-pulse' : ''}`} />
+              <span>{formatTime(timeLeft)}</span>
+            </div>
 
-          {/* Submit */}
-          <button onClick={() => setConfirmOpen(true)} disabled={submitting}
-            className="h-9 px-3 sm:px-5 bg-primary text-white rounded-lg text-xs sm:text-sm font-semibold hover:brightness-110 active:scale-95 shadow-sm disabled:opacity-70 whitespace-nowrap">
-            {submitting ? 'Mengumpulkan…' : <><span className="hidden sm:inline">Kumpulkan Ujian</span><span className="sm:hidden">Kumpulkan</span></>}
-          </button>
+            {/* Fullscreen */}
+            <button
+              onClick={requestFullscreen}
+              title="Fullscreen"
+              className="hidden sm:flex p-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors"
+            >
+              <Maximize className="w-4 h-4" />
+            </button>
+
+            {/* Submit */}
+            <button
+              onClick={() => setConfirmOpen(true)}
+              disabled={submitting}
+              className="h-9 px-4 sm:px-5 bg-primary text-white rounded-lg text-xs sm:text-sm font-semibold hover:brightness-110 active:scale-95 transition-all shadow-sm disabled:opacity-70 whitespace-nowrap"
+            >
+              {submitting
+                ? 'Mengumpulkan…'
+                : <><span className="hidden sm:inline">Kumpulkan Ujian</span><span className="sm:hidden">Kumpulkan</span></>
+              }
+            </button>
+          </div>
         </div>
       </header>
 

@@ -37,8 +37,8 @@ export default function SantriPage() {
     if (!token.trim()) { toast.error('Masukkan token ujian'); return; }
     joinExam.mutate(token.trim(), {
       onSuccess: (data) => {
-        toast.success('Token valid! Memulai ujian…');
-        router.push(`/santri/exam/${data.examId}?session=${data.sessionId}`);
+        toast.success('Token valid! Bersiap ujian…');
+        router.push(`/santri/waiting/${data.sessionId}`);
       },
     });
   };
