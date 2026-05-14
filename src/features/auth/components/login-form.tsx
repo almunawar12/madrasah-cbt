@@ -46,24 +46,24 @@ export function LoginForm() {
   };
 
   return (
-    <main className="w-full max-w-[1100px] h-auto md:h-[780px] flex flex-col md:flex-row overflow-hidden rounded-2xl shadow-[0_20px_50px_rgba(0,105,72,0.12)] bg-surface-container-lowest mx-auto">
+    <main className="w-full max-w-[1100px] h-screen md:h-[min(780px,calc(100vh-2rem))] flex flex-col md:flex-row overflow-hidden md:rounded-2xl shadow-[0_20px_50px_rgba(0,105,72,0.12)] bg-surface-container-lowest mx-auto">
       {/* Left: visual panel */}
-      <section className="hidden md:flex md:w-1/2 relative bg-primary islamic-pattern-white items-center justify-center overflow-hidden">
+      <section className="hidden md:flex md:w-1/2 relative bg-primary items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary-container opacity-95" />
-        <div className="relative z-10 p-12 max-w-md text-on-primary">
-          <div className="flex items-center gap-3 mb-8">
+        <div className="relative z-10 p-10 max-w-md text-on-primary">
+          <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
               <BookOpenCheck className="w-7 h-7 text-white" />
             </div>
             <span className="text-2xl font-bold tracking-tight">SantriExam</span>
           </div>
-          <h1 className="text-4xl font-bold leading-tight mb-4">
+          <h1 className="text-4xl font-bold leading-tight mb-3">
             Digital Excellence<br />in Madrasah
           </h1>
-          <p className="text-primary-fixed/90 text-base leading-relaxed mb-10">
+          <p className="text-primary-fixed/90 text-base leading-relaxed mb-8">
             Platform ujian berbasis komputer yang modern, aman, dan terpercaya untuk seluruh civitas madrasah.
           </p>
-          <div className="grid grid-cols-2 gap-4 mb-10">
+          <div className="grid grid-cols-2 gap-3 mb-8">
             {[
               { icon: '📚', label: 'Bank Soal', value: '10.000+' },
               { icon: '🎓', label: 'Santri Aktif', value: '1.284' },
@@ -80,10 +80,7 @@ export function LoginForm() {
           <div className="flex items-center gap-3">
             <div className="flex -space-x-2">
               {['ZH', 'UF', 'MY'].map((i) => (
-                <div
-                  key={i}
-                  className="w-9 h-9 rounded-full border-2 border-white bg-primary-container flex items-center justify-center text-xs font-bold text-on-primary-container"
-                >
+                <div key={i} className="w-9 h-9 rounded-full border-2 border-white bg-primary-container flex items-center justify-center text-xs font-bold text-on-primary-container">
                   {i}
                 </div>
               ))}
@@ -94,22 +91,22 @@ export function LoginForm() {
       </section>
 
       {/* Right: auth form */}
-      <section className="w-full md:w-1/2 flex flex-col items-center justify-center p-8 md:p-14 bg-surface-container-lowest">
+      <section className="w-full md:w-1/2 flex flex-col items-center justify-center px-8 py-6 md:px-14 bg-surface-container-lowest overflow-hidden">
         <div className="w-full max-w-sm">
           {/* Mobile branding */}
-          <div className="flex items-center gap-3 mb-2 md:hidden">
+          <div className="flex items-center gap-3 mb-4 md:hidden">
             <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
               <BookOpenCheck className="w-6 h-6 text-white" />
             </div>
             <span className="text-xl font-bold text-primary">SantriExam</span>
           </div>
 
-          <div className="mb-8 md:mb-10">
+          <div className="mb-6">
             <h2 className="text-2xl font-bold text-on-surface mb-1">Selamat Datang</h2>
             <p className="text-sm text-on-surface-variant">Masuk ke akun Anda untuk melanjutkan.</p>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               label="Email atau NIS"
               htmlFor="identifier"
@@ -149,7 +146,7 @@ export function LoginForm() {
               </div>
             </FormField>
 
-            <div className="flex items-center justify-between pt-1">
+            <div className="flex items-center justify-between">
               <Checkbox id="remember" label="Ingat saya" />
               <Link
                 href="/forgot-password"
@@ -174,8 +171,8 @@ export function LoginForm() {
             </Button>
           </form>
 
-          <div className="mt-10 pt-6 border-t border-outline-variant/30 text-center">
-            <p className="text-xs text-on-surface-variant mb-3">Butuh bantuan?</p>
+          <div className="mt-6 pt-5 border-t border-outline-variant/30 text-center">
+            <p className="text-xs text-on-surface-variant mb-2">Butuh bantuan?</p>
             <div className="flex items-center justify-center gap-6">
               <a href="#" className="text-xs font-semibold text-primary hover:opacity-80 transition-opacity uppercase tracking-wide">
                 Dukungan
@@ -186,7 +183,7 @@ export function LoginForm() {
             </div>
           </div>
 
-          <p className="mt-6 text-center text-[11px] text-outline">
+          <p className="mt-4 text-center text-[11px] text-outline">
             © 2024 SantriExam · Digital Madrasah Ecosystem
           </p>
         </div>
