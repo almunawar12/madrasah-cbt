@@ -346,7 +346,7 @@ export default function ExamSessionPage() {
 
       {/* ── Header ────────────────────────────────────────────────────────── */}
       <header className="sticky top-0 z-40 w-full bg-surface-container-lowest border-b border-outline-variant/50 shadow-sm">
-        <div className="flex items-center justify-between h-14 sm:h-16 px-4 sm:px-6 gap-3">
+        <div className="flex items-center justify-between h-14 sm:h-16 px-6 sm:px-10 lg:px-16 gap-3">
 
           {/* Left: exam info */}
           <div className="flex items-center gap-3 min-w-0">
@@ -405,7 +405,7 @@ export default function ExamSessionPage() {
       </div>
 
       {/* ── Main ──────────────────────────────────────────────────────────── */}
-      <main className="flex-1 flex flex-col md:flex-row max-w-7xl mx-auto w-full px-3 sm:px-5 md:px-8 py-4 md:py-6 gap-4 md:gap-6">
+      <main className="flex-1 flex flex-col md:flex-row max-w-7xl mx-auto w-full px-6 sm:px-10 lg:px-16 py-6 md:py-8 gap-4 md:gap-6">
 
         {/* Question area */}
         <section className="flex-1 flex flex-col gap-4">
