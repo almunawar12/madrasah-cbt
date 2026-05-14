@@ -103,10 +103,15 @@ export default function ResultPage() {
   const totalItems = session.exam.items.length;
   const mcAnswers = session.answers.filter((a) => a.question.type === 'MULTIPLE_CHOICE');
   const essayAnswers = session.answers.filter((a) => a.question.type === 'ESSAY');
+  const essayPending = essayAnswers.filter((a) => a.score === null);
+  const essayGraded = essayAnswers.filter((a) => a.score !== null);
+  const hasEssay = essayAnswers.length > 0;
+  const allEssayGraded = hasEssay && essayPending.length === 0;
+  const scoreIsFinal = !hasEssay || allEssayGraded;
   const correctCount = mcAnswers.filter((a) => a.isCorrect).length;
   const wrongCount = mcAnswers.filter((a) => a.isCorrect === false).length;
   const unanswered = totalItems - session.answers.length;
-  const passed = score >= 70;
+  const passed = scoreIsFinal && score >= 70;
   const timeTaken = session.startedAt && session.submittedAt
     ? formatDuration(session.startedAt, session.submittedAt)
     : '—';
@@ -130,9 +135,18 @@ export default function ResultPage() {
             <p className="text-white/70 text-sm mt-1">{session.exam.subject.name}</p>
           </div>
           <ScoreRing score={Math.round(score)} />
-          <p className="text-white/80 text-sm">
-            {passed ? '✓ Memenuhi KKM (70)' : '✗ Belum memenuhi KKM (70)'}
-          </p>
+          <div className="text-center">
+            {scoreIsFinal ? (
+              <p className="text-white/80 text-sm">
+                {passed ? '✓ Memenuhi KKM (70)' : '✗ Belum memenuhi KKM (70)'}
+              </p>
+            ) : (
+              <div className="bg-white/15 rounded-lg px-4 py-2">
+                <p className="text-white text-xs font-bold">⏳ Nilai Sementara (Hanya MC)</p>
+                <p className="text-white/70 text-[11px] mt-0.5">{essayPending.length} soal esai menunggu penilaian guru</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -162,17 +176,31 @@ export default function ResultPage() {
         </div>
       )}
 
-      {/* Essay note */}
-      {essayAnswers.length > 0 && (
-        <div className="flex items-start gap-3 bg-secondary-container/20 border border-secondary-container rounded-xl p-4">
-          <BookOpen className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-          <div>
-            <p className="text-sm font-semibold text-on-surface">Soal Esai Menunggu Penilaian</p>
-            <p className="text-xs text-on-surface-variant mt-0.5">
-              {essayAnswers.length} soal esai akan dinilai oleh guru. Nilai akhir mungkin akan berubah.
-            </p>
+      {/* Essay status */}
+      {hasEssay && (
+        allEssayGraded ? (
+          <div className="flex items-start gap-3 bg-primary/5 border border-primary/20 rounded-xl p-4">
+            <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-semibold text-on-surface">Semua Esai Sudah Dinilai</p>
+              <p className="text-xs text-on-surface-variant mt-0.5">
+                {essayGraded.length} soal esai telah dinilai guru. Nilai di atas adalah nilai akhir.
+              </p>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="flex items-start gap-3 bg-tertiary-container/10 border border-tertiary-container/30 rounded-xl p-4">
+            <BookOpen className="w-5 h-5 text-tertiary flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-semibold text-on-surface">Esai Menunggu Penilaian Guru</p>
+              <p className="text-xs text-on-surface-variant mt-0.5">
+                {essayPending.length} dari {essayAnswers.length} soal esai belum dinilai.
+                {essayGraded.length > 0 && ` (${essayGraded.length} sudah dinilai)`}
+                {' '}Nilai akan diperbarui otomatis setelah guru menilai.
+              </p>
+            </div>
+          </div>
+        )
       )}
 
       {/* MC breakdown */}

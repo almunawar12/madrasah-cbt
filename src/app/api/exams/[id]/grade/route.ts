@@ -3,6 +3,7 @@ import { ok, fail } from '@/lib/api-response';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 import { logAudit, getIp } from '@/lib/audit';
+import { recalculateSessionScore } from '@/features/exams/services/exam.service';
 import { z } from 'zod';
 
 // GET /api/exams/[id]/grade — list all essay answers for this exam
@@ -66,7 +67,14 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     data: { score, isCorrect: score > 0, gradedAt: new Date() },
   });
 
-  await logAudit(session.user.id, 'ESSAY_GRADE', `answer:${answerId}`, { score, examId: id }, getIp(req));
+  // Recalculate session score to include this essay grade
+  const newScore = await recalculateSessionScore(answer.sessionId);
+  await prisma.examSession.update({
+    where: { id: answer.sessionId },
+    data: { score: newScore },
+  });
 
-  return ok(updated, 'Jawaban dinilai');
+  await logAudit(session.user.id, 'ESSAY_GRADE', `answer:${answerId}`, { score, examId: id, newSessionScore: newScore }, getIp(req));
+
+  return ok({ ...updated, newSessionScore: newScore }, 'Jawaban dinilai');
 }
