@@ -1,0 +1,230 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  GURU
+  PENGAWAS
+  SANTRI
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  ESSAY
+}
+
+enum ExamStatus {
+  DRAFT
+  PUBLISHED
+  ONGOING
+  FINISHED
+  ARCHIVED
+}
+
+enum SessionStatus {
+  WAITING
+  IN_PROGRESS
+  SUBMITTED
+  FORCE_SUBMITTED
+  BLOCKED
+}
+
+model User {
+  id           String     @id @default(uuid())
+  email        String?    @unique
+  nis          String?    @unique
+  fullName     String     @map("full_name")
+  phone        String?
+  passwordHash String     @map("password_hash")
+  role         Role
+  status       UserStatus @default(ACTIVE)
+  classId      String?    @map("class_id")
+  class        Class?     @relation(fields: [classId], references: [id], onDelete: SetNull)
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  examSessions ExamSession[]
+  answers      Answer[]
+  auditLogs    AuditLog[]
+
+  @@index([role])
+  @@index([status])
+  @@map("user")
+}
+
+model Class {
+  id           String   @id @default(uuid())
+  name         String
+  academicYear String   @map("academic_year")
+  students     User[]
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@unique([name, academicYear])
+  @@map("class")
+}
+
+model Subject {
+  id          String     @id @default(uuid())
+  name        String     @unique
+  description String?
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  questions   Question[]
+  exams       Exam[]
+
+  @@map("subject")
+}
+
+model Question {
+  id          String       @id @default(uuid())
+  subjectId   String       @map("subject_id")
+  subject     Subject      @relation(fields: [subjectId], references: [id])
+  type        QuestionType
+  difficulty  Difficulty   @default(MEDIUM)
+  text        String
+  imageUrl    String?      @map("image_url")
+  score       Int          @default(1)
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  options     QuestionOption[]
+  examItems   ExamItem[]
+  answers     Answer[]
+
+  @@index([subjectId])
+  @@index([type])
+  @@index([difficulty])
+  @@map("question")
+}
+
+model QuestionOption {
+  id         String   @id @default(uuid())
+  questionId String   @map("question_id")
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  label      String
+  text       String
+  isCorrect  Boolean  @default(false) @map("is_correct")
+  order      Int      @default(0)
+
+  @@index([questionId])
+  @@map("question_option")
+}
+
+model Exam {
+  id            String     @id @default(uuid())
+  title         String
+  subjectId     String     @map("subject_id")
+  subject       Subject    @relation(fields: [subjectId], references: [id])
+  token         String     @unique
+  status        ExamStatus @default(DRAFT)
+  duration      Int
+  startTime     DateTime?  @map("start_time")
+  endTime       DateTime?  @map("end_time")
+  shuffleQ      Boolean    @default(false) @map("shuffle_q")
+  shuffleOpts   Boolean    @default(false) @map("shuffle_opts")
+  createdAt     DateTime   @default(now()) @map("created_at")
+  updatedAt     DateTime   @updatedAt @map("updated_at")
+
+  items         ExamItem[]
+  sessions      ExamSession[]
+
+  @@index([token])
+  @@index([status])
+  @@map("exam")
+}
+
+model ExamItem {
+  id         String   @id @default(uuid())
+  examId     String   @map("exam_id")
+  exam       Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+  questionId String   @map("question_id")
+  question   Question @relation(fields: [questionId], references: [id])
+  order      Int      @default(0)
+
+  @@unique([examId, questionId])
+  @@index([examId])
+  @@map("exam_item")
+}
+
+model ExamSession {
+  id              String        @id @default(uuid())
+  examId          String        @map("exam_id")
+  exam            Exam          @relation(fields: [examId], references: [id])
+  userId          String        @map("user_id")
+  user            User          @relation(fields: [userId], references: [id])
+  status          SessionStatus @default(WAITING)
+  startedAt       DateTime?     @map("started_at")
+  submittedAt     DateTime?     @map("submitted_at")
+  score           Float?
+  violationCount  Int           @default(0) @map("violation_count")
+  violations      Json?
+  ipAddress       String?       @map("ip_address")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  answers         Answer[]
+
+  @@unique([examId, userId])
+  @@index([examId])
+  @@index([userId])
+  @@index([status])
+  @@map("exam_session")
+}
+
+model Answer {
+  id          String      @id @default(uuid())
+  sessionId   String      @map("session_id")
+  session     ExamSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  questionId  String      @map("question_id")
+  question    Question    @relation(fields: [questionId], references: [id])
+  userId      String      @map("user_id")
+  user        User        @relation(fields: [userId], references: [id])
+  optionId    String?     @map("option_id")
+  essayText   String?     @map("essay_text")
+  isCorrect   Boolean?    @map("is_correct")
+  score       Float?
+  gradedAt    DateTime?   @map("graded_at")
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+
+  @@unique([sessionId, questionId])
+  @@index([sessionId])
+  @@index([questionId])
+  @@map("answer")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?  @map("user_id")
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String
+  resource  String?
+  metadata  Json?
+  ipAddress String?  @map("ip_address")
+  userAgent String?  @map("user_agent")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([action])
+  @@map("audit_log")
+}

@@ -1,0 +1,883 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SantriExam - Question Bank</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-tertiary-fixed': '#410004',
+              background: '#f7f9fb',
+              'on-error': '#ffffff',
+              outline: '#6d7a72',
+              'surface-container-high': '#e6e8ea',
+              'on-secondary-container': '#57657a',
+              'on-secondary': '#ffffff',
+              surface: '#f7f9fb',
+              error: '#ba1a1a',
+              'primary-container': '#00855d',
+              'surface-container-low': '#f2f4f6',
+              'surface-bright': '#f7f9fb',
+              'surface-tint': '#006c4a',
+              'surface-variant': '#e0e3e5',
+              'secondary-container': '#d5e3fc',
+              'on-tertiary-container': '#fffbff',
+              'outline-variant': '#bccac0',
+              'on-secondary-fixed': '#0d1c2e',
+              'inverse-surface': '#2d3133',
+              'on-tertiary-fixed-variant': '#7f2928',
+              'tertiary-fixed-dim': '#ffb3ae',
+              'on-primary-fixed-variant': '#005137',
+              'error-container': '#ffdad6',
+              'on-primary-container': '#f5fff7',
+              'on-tertiary': '#ffffff',
+              'on-surface': '#191c1e',
+              tertiary: '#9b3e3b',
+              'primary-fixed': '#85f8c4',
+              'surface-container': '#eceef0',
+              secondary: '#515f74',
+              'on-error-container': '#93000a',
+              'surface-container-lowest': '#ffffff',
+              'tertiary-fixed': '#ffdad7',
+              'tertiary-container': '#ba5551',
+              'secondary-fixed-dim': '#b9c7df',
+              'surface-container-highest': '#e0e3e5',
+              'on-background': '#191c1e',
+              'primary-fixed-dim': '#68dba9',
+              'inverse-primary': '#68dba9',
+              'secondary-fixed': '#d5e3fc',
+              'inverse-on-surface': '#eff1f3',
+              'on-primary': '#ffffff',
+              primary: '#006948',
+              'on-primary-fixed': '#002114',
+              'surface-dim': '#d8dadc',
+              'on-surface-variant': '#3d4a42',
+              'on-secondary-fixed-variant': '#3a485b',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              'margin-desktop': '32px',
+              'container-max': '1440px',
+              base: '8px',
+              'margin-mobile': '16px',
+              gutter: '24px',
+            },
+            fontFamily: {
+              'display-lg': ['Plus Jakarta Sans'],
+              'body-lg': ['Plus Jakarta Sans'],
+              'headline-lg': ['Plus Jakarta Sans'],
+              'label-md': ['Plus Jakarta Sans'],
+              'headline-md': ['Plus Jakarta Sans'],
+              'body-md': ['Plus Jakarta Sans'],
+              'label-sm': ['Plus Jakarta Sans'],
+            },
+            fontSize: {
+              'display-lg': [
+                '48px',
+                {
+                  lineHeight: '60px',
+                  letterSpacing: '-0.02em',
+                  fontWeight: '700',
+                },
+              ],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'headline-lg': [
+                '30px',
+                { lineHeight: '38px', fontWeight: '600' },
+              ],
+              'label-md': ['14px', { lineHeight: '20px', fontWeight: '500' }],
+              'headline-md': [
+                '24px',
+                { lineHeight: '32px', fontWeight: '600' },
+              ],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'label-sm': [
+                '12px',
+                {
+                  lineHeight: '16px',
+                  letterSpacing: '0.05em',
+                  fontWeight: '600',
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      .pattern-overlay {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 15-15 15-15-15zM0 30l15 15-15 15-15-15zM60 30l15 15-15 15-15-15zM30 60l15 15-15 15-15-15z' fill='%23006c4a' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E");
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background pattern-overlay min-h-screen">
+    <!-- SideNavBar Component -->
+    <aside
+      class="fixed left-0 top-0 h-full w-[280px] bg-surface-container-highest dark:bg-inverse-surface shadow-[4px_0_24px_rgba(5,150,105,0.08)] flex flex-col py-base px-4 z-50"
+    >
+      <div class="flex items-center gap-3 px-2 py-6 mb-8">
+        <div
+          class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-on-primary-container"
+        >
+          <span class="material-symbols-outlined">menu_book</span>
+        </div>
+        <div>
+          <h1
+            class="font-display-lg text-[24px] font-bold text-primary dark:text-primary-fixed-dim leading-none"
+          >
+            SantriExam
+          </h1>
+          <p
+            class="font-label-sm text-label-sm text-on-surface-variant opacity-70"
+          >
+            Digital Madrasah
+          </p>
+        </div>
+      </div>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-primary-container/5"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-body-md text-body-md">Dashboard</span>
+        </a>
+        <!-- Active State: Question Bank -->
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 border-tertiary-container bg-primary-container/10 text-primary font-bold"
+          href="#"
+        >
+          <span class="material-symbols-outlined">menu_book</span>
+          <span class="font-body-md text-body-md">Question Bank</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-primary-container/5"
+          href="#"
+        >
+          <span class="material-symbols-outlined">timer</span>
+          <span class="font-body-md text-body-md">Exam Sessions</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-primary-container/5"
+          href="#"
+        >
+          <span class="material-symbols-outlined">groups</span>
+          <span class="font-body-md text-body-md">Student Records</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-primary-container/5"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-body-md text-body-md">System Settings</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-primary-container/5"
+          href="#"
+        >
+          <span class="material-symbols-outlined">help_outline</span>
+          <span class="font-body-md text-body-md">Support</span>
+        </a>
+      </nav>
+      <div class="mt-auto pt-6 border-t border-outline-variant/30">
+        <button
+          class="w-full bg-primary text-on-primary py-3 px-4 rounded-xl font-label-md flex items-center justify-center gap-2 mb-4 transition-all hover:opacity-90 active:scale-95 shadow-md"
+        >
+          <span class="material-symbols-outlined text-[20px]">add</span>
+          New Exam
+        </button>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-error transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-body-md text-body-md">Logout</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content Wrapper -->
+    <div class="ml-[280px] flex flex-col min-h-screen">
+      <!-- TopAppBar Component -->
+      <header
+        class="sticky top-0 z-40 bg-surface-container-lowest/80 backdrop-blur-md border-b border-outline-variant h-16 flex items-center justify-between px-margin-desktop"
+      >
+        <div class="flex items-center gap-gutter flex-1">
+          <div class="relative w-full max-w-md">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]"
+              >search</span
+            >
+            <input
+              class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 font-body-md text-on-surface focus:ring-2 focus:ring-primary-container transition-all"
+              placeholder="Search questions, topics, or subjects..."
+              type="text"
+            />
+          </div>
+          <nav class="hidden md:flex items-center gap-6">
+            <a
+              class="font-label-md text-on-surface-variant hover:text-primary transition-colors"
+              href="#"
+              >Exams</a
+            >
+            <a
+              class="font-label-md text-on-surface-variant hover:text-primary transition-colors"
+              href="#"
+              >Results</a
+            >
+            <a
+              class="font-label-md text-on-surface-variant hover:text-primary transition-colors"
+              href="#"
+              >Schedule</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-4">
+          <div
+            class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary-container/30 text-secondary font-label-md"
+          >
+            <span class="material-symbols-outlined text-[18px]"
+              >person_outline</span
+            >
+            Guru Access
+          </div>
+          <button
+            class="p-2 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <button
+            class="p-2 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant"
+          >
+            <span class="material-symbols-outlined">help</span>
+          </button>
+          <div
+            class="w-10 h-10 rounded-full bg-outline-variant flex items-center justify-center overflow-hidden border-2 border-primary/10"
+          >
+            <img
+              alt="User Avatar"
+              class="w-full h-full object-cover"
+              data-alt="A professional studio portrait of a middle-aged teacher with a warm, friendly expression, wearing a clean white shirt and dark blazer. The lighting is soft and natural, emphasizing a bright and professional academic atmosphere. The background is a blurred school environment with hints of soft green and white tones to match the SantriExam brand."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuApOt6jTxS2x09Gfs6VP76weV8RjzRrViVNHHOFknF0P5PkQgr_aIvsWOyJwlom_7Q5ibGZKVnNVNuHFQvqA0qiIujKusBOUBiK8oSLS4UkQa6MfEb4WhmDxLl-EPpMcczZn_FeMdDZTaTBtoUCZFh4T5tGvUQ6Rtb-6Ffs3Egzys5mg0a-jvrkgKDagMUx2OutAgrICqfupBFU2bCKDkSP0sjJjp3FdUHm5-igtF9V3JIwpxG_LjziEq0KyfVAfrVbqoj1RxjBkgUa"
+            />
+          </div>
+        </div>
+      </header>
+      <!-- Main Page Content -->
+      <main class="p-margin-desktop max-w-container-max mx-auto w-full">
+        <!-- Page Header Section -->
+        <div
+          class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8"
+        >
+          <div>
+            <div
+              class="flex items-center gap-2 text-primary font-label-sm mb-2"
+            >
+              <span class="material-symbols-outlined text-[16px]"
+                >folder_open</span
+              >
+              LIBRARY / REPOSITORY
+            </div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">
+              Question Bank
+            </h2>
+            <p class="text-on-surface-variant font-body-md">
+              Manage and organize your digital exam questions.
+            </p>
+          </div>
+          <button
+            class="bg-primary text-on-primary px-6 py-3 rounded-xl font-label-md flex items-center gap-2 hover:bg-primary-container transition-all shadow-lg active:scale-95"
+          >
+            <span class="material-symbols-outlined">add_circle</span>
+            Create Question
+          </button>
+        </div>
+        <!-- Filters Bar -->
+        <div
+          class="bg-surface-container-lowest p-4 rounded-xl shadow-sm mb-6 flex flex-wrap items-center gap-4 border border-outline-variant/30"
+        >
+          <div
+            class="flex items-center gap-2 text-on-surface-variant font-label-md px-2 border-r border-outline-variant pr-4 mr-2"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >filter_list</span
+            >
+            FILTERS
+          </div>
+          <select
+            class="bg-surface-container-low border-none rounded-lg font-label-md text-on-surface px-4 py-2 focus:ring-2 focus:ring-primary/20 min-w-[140px]"
+          >
+            <option>Subject: All</option>
+            <option>Fiqh</option>
+            <option>Aqidah</option>
+            <option>Arabic</option>
+            <option>Mathematics</option>
+          </select>
+          <select
+            class="bg-surface-container-low border-none rounded-lg font-label-md text-on-surface px-4 py-2 focus:ring-2 focus:ring-primary/20 min-w-[140px]"
+          >
+            <option>Difficulty: All</option>
+            <option>Easy</option>
+            <option>Medium</option>
+            <option>Hard</option>
+          </select>
+          <select
+            class="bg-surface-container-low border-none rounded-lg font-label-md text-on-surface px-4 py-2 focus:ring-2 focus:ring-primary/20 min-w-[140px]"
+          >
+            <option>Type: All</option>
+            <option>Multiple Choice</option>
+            <option>Essay</option>
+            <option>True/False</option>
+          </select>
+          <div class="ml-auto flex items-center gap-2">
+            <span class="text-on-surface-variant font-label-sm"
+              >Showing 1-10 of 124</span
+            >
+          </div>
+        </div>
+        <!-- Questions Table -->
+        <div
+          class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden"
+        >
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr
+                class="bg-surface-container-high/50 border-b border-outline-variant/30"
+              >
+                <th
+                  class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Question Preview
+                </th>
+                <th
+                  class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Subject
+                </th>
+                <th
+                  class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Level
+                </th>
+                <th
+                  class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Type
+                </th>
+                <th
+                  class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Date Created
+                </th>
+                <th
+                  class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider text-right"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant/20">
+              <!-- Table Row 1 -->
+              <tr
+                class="hover:bg-surface-container-low transition-colors group"
+              >
+                <td class="px-6 py-5 max-w-md">
+                  <p
+                    class="text-on-surface font-body-md font-medium line-clamp-1"
+                  >
+                    What are the five pillars of Islam and their significance in
+                    daily life?
+                  </p>
+                  <span class="text-on-surface-variant font-label-sm"
+                    >ID: QB-2023-001</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface font-body-md">Fiqh</span>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="bg-green-100 text-emerald-800 px-3 py-1 rounded-full text-[12px] font-bold"
+                    >EASY</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface-variant font-label-md"
+                    >Essay</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface-variant font-label-md"
+                    >Oct 12, 2023</span
+                  >
+                </td>
+                <td class="px-6 py-5 text-right">
+                  <div class="flex items-center justify-end gap-1">
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                      title="Preview"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >visibility</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                      title="Edit"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >edit</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                      title="Duplicate"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >content_copy</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-error hover:bg-error-container/10 rounded-lg transition-all"
+                      title="Delete"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >delete</span
+                      >
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Table Row 2 -->
+              <tr
+                class="hover:bg-surface-container-low transition-colors group"
+              >
+                <td class="px-6 py-5 max-w-md">
+                  <p
+                    class="text-on-surface font-body-md font-medium line-clamp-1"
+                  >
+                    Solve the following linear equation: 2x + 5 = 15. Find x.
+                  </p>
+                  <span class="text-on-surface-variant font-label-sm"
+                    >ID: QB-2023-042</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface font-body-md">Mathematics</span>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-[12px] font-bold"
+                    >MEDIUM</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface-variant font-label-md"
+                    >Multiple Choice</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface-variant font-label-md"
+                    >Oct 14, 2023</span
+                  >
+                </td>
+                <td class="px-6 py-5 text-right">
+                  <div class="flex items-center justify-end gap-1">
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >visibility</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >edit</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >content_copy</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-error hover:bg-error-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >delete</span
+                      >
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Table Row 3 -->
+              <tr
+                class="hover:bg-surface-container-low transition-colors group"
+              >
+                <td class="px-6 py-5 max-w-md">
+                  <p
+                    class="text-on-surface font-body-md font-medium line-clamp-1"
+                  >
+                    Explain the rules of Tajwid regarding Nun Sakinah and
+                    Tanwin.
+                  </p>
+                  <span class="text-on-surface-variant font-label-sm"
+                    >ID: QB-2023-015</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface font-body-md">Tajwid</span>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-[12px] font-bold"
+                    >HARD</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface-variant font-label-md"
+                    >Essay</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface-variant font-label-md"
+                    >Oct 15, 2023</span
+                  >
+                </td>
+                <td class="px-6 py-5 text-right">
+                  <div class="flex items-center justify-end gap-1">
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >visibility</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >edit</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >content_copy</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-error hover:bg-error-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >delete</span
+                      >
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Table Row 4 -->
+              <tr
+                class="hover:bg-surface-container-low transition-colors group"
+              >
+                <td class="px-6 py-5 max-w-md">
+                  <p
+                    class="text-on-surface font-body-md font-medium line-clamp-1"
+                  >
+                    Translate the following Arabic sentence into Indonesian:
+                    'Al-ilmu nurun'.
+                  </p>
+                  <span class="text-on-surface-variant font-label-sm"
+                    >ID: QB-2023-088</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface font-body-md">Arabic</span>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="bg-green-100 text-emerald-800 px-3 py-1 rounded-full text-[12px] font-bold"
+                    >EASY</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface-variant font-label-md"
+                    >Multiple Choice</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface-variant font-label-md"
+                    >Oct 18, 2023</span
+                  >
+                </td>
+                <td class="px-6 py-5 text-right">
+                  <div class="flex items-center justify-end gap-1">
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >visibility</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >edit</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >content_copy</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-error hover:bg-error-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >delete</span
+                      >
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <!-- Table Row 5 -->
+              <tr
+                class="hover:bg-surface-container-low transition-colors group"
+              >
+                <td class="px-6 py-5 max-w-md">
+                  <p
+                    class="text-on-surface font-body-md font-medium line-clamp-1"
+                  >
+                    Identify the correct verb conjugation for the third person
+                    plural in Arabic.
+                  </p>
+                  <span class="text-on-surface-variant font-label-sm"
+                    >ID: QB-2023-102</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface font-body-md">Arabic</span>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-[12px] font-bold"
+                    >MEDIUM</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface-variant font-label-md"
+                    >Multiple Choice</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <span class="text-on-surface-variant font-label-md"
+                    >Oct 20, 2023</span
+                  >
+                </td>
+                <td class="px-6 py-5 text-right">
+                  <div class="flex items-center justify-end gap-1">
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >visibility</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >edit</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >content_copy</span
+                      >
+                    </button>
+                    <button
+                      class="p-2 text-on-surface-variant hover:text-error hover:bg-error-container/10 rounded-lg transition-all"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >delete</span
+                      >
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Pagination -->
+          <div
+            class="px-6 py-4 bg-surface-container-low/30 border-t border-outline-variant/30 flex items-center justify-between"
+          >
+            <div
+              class="flex items-center gap-4 font-label-md text-on-surface-variant"
+            >
+              <span>Items per page:</span>
+              <select
+                class="bg-transparent border border-outline-variant rounded px-2 py-1 text-on-surface"
+              >
+                <option>10</option>
+                <option>20</option>
+                <option>50</option>
+              </select>
+            </div>
+            <div class="flex items-center gap-2">
+              <button
+                class="p-2 rounded-lg hover:bg-surface-container-high text-on-surface-variant disabled:opacity-30"
+                disabled=""
+              >
+                <span class="material-symbols-outlined">first_page</span>
+              </button>
+              <button
+                class="p-2 rounded-lg hover:bg-surface-container-high text-on-surface-variant disabled:opacity-30"
+                disabled=""
+              >
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <div class="flex items-center gap-1">
+                <button
+                  class="w-10 h-10 rounded-lg bg-primary text-on-primary font-label-md"
+                >
+                  1
+                </button>
+                <button
+                  class="w-10 h-10 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-md"
+                >
+                  2
+                </button>
+                <button
+                  class="w-10 h-10 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-md"
+                >
+                  3
+                </button>
+                <span class="px-2">...</span>
+                <button
+                  class="w-10 h-10 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-md"
+                >
+                  13
+                </button>
+              </div>
+              <button
+                class="p-2 rounded-lg hover:bg-surface-container-high text-on-surface-variant"
+              >
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+              <button
+                class="p-2 rounded-lg hover:bg-surface-container-high text-on-surface-variant"
+              >
+                <span class="material-symbols-outlined">last_page</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Bento Stats Grid (Academic context) -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mt-8">
+          <div
+            class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/30 flex flex-col gap-2"
+          >
+            <div
+              class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined">quiz</span>
+            </div>
+            <p class="font-label-sm text-on-surface-variant mt-2">
+              Total Questions
+            </p>
+            <h3 class="font-headline-md text-headline-md text-on-surface">
+              1,248
+            </h3>
+          </div>
+          <div
+            class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/30 flex flex-col gap-2"
+          >
+            <div
+              class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined">trending_up</span>
+            </div>
+            <p class="font-label-sm text-on-surface-variant mt-2">
+              Used in Exams
+            </p>
+            <h3 class="font-headline-md text-headline-md text-on-surface">
+              85%
+            </h3>
+          </div>
+          <div
+            class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/30 flex flex-col gap-2"
+          >
+            <div
+              class="w-10 h-10 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined">auto_awesome</span>
+            </div>
+            <p class="font-label-sm text-on-surface-variant mt-2">
+              AI Generated
+            </p>
+            <h3 class="font-headline-md text-headline-md text-on-surface">
+              42
+            </h3>
+          </div>
+          <div
+            class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/30 flex flex-col gap-2"
+          >
+            <div
+              class="w-10 h-10 rounded-full bg-outline/10 text-outline flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined">history</span>
+            </div>
+            <p class="font-label-sm text-on-surface-variant mt-2">
+              Last Update
+            </p>
+            <h3 class="font-headline-md text-headline-md text-on-surface">
+              2h ago
+            </h3>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

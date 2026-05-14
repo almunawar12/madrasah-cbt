@@ -1,0 +1,840 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SantriExam Super Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-tertiary-fixed': '#410004',
+              background: '#f7f9fb',
+              'on-error': '#ffffff',
+              outline: '#6d7a72',
+              'surface-container-high': '#e6e8ea',
+              'on-secondary-container': '#57657a',
+              'on-secondary': '#ffffff',
+              surface: '#f7f9fb',
+              error: '#ba1a1a',
+              'primary-container': '#00855d',
+              'surface-container-low': '#f2f4f6',
+              'surface-bright': '#f7f9fb',
+              'surface-tint': '#006c4a',
+              'surface-variant': '#e0e3e5',
+              'secondary-container': '#d5e3fc',
+              'on-tertiary-container': '#fffbff',
+              'outline-variant': '#bccac0',
+              'on-secondary-fixed': '#0d1c2e',
+              'inverse-surface': '#2d3133',
+              'on-tertiary-fixed-variant': '#7f2928',
+              'tertiary-fixed-dim': '#ffb3ae',
+              'on-primary-fixed-variant': '#005137',
+              'error-container': '#ffdad6',
+              'on-primary-container': '#f5fff7',
+              'on-tertiary': '#ffffff',
+              'on-surface': '#191c1e',
+              tertiary: '#9b3e3b',
+              'primary-fixed': '#85f8c4',
+              'surface-container': '#eceef0',
+              secondary: '#515f74',
+              'on-error-container': '#93000a',
+              'surface-container-lowest': '#ffffff',
+              'tertiary-fixed': '#ffdad7',
+              'tertiary-container': '#ba5551',
+              'secondary-fixed-dim': '#b9c7df',
+              'surface-container-highest': '#e0e3e5',
+              'on-background': '#191c1e',
+              'primary-fixed-dim': '#68dba9',
+              'inverse-primary': '#68dba9',
+              'secondary-fixed': '#d5e3fc',
+              'inverse-on-surface': '#eff1f3',
+              'on-primary': '#ffffff',
+              primary: '#006948',
+              'on-primary-fixed': '#002114',
+              'surface-dim': '#d8dadc',
+              'on-surface-variant': '#3d4a42',
+              'on-secondary-fixed-variant': '#3a485b',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              'margin-desktop': '32px',
+              'container-max': '1440px',
+              base: '8px',
+              'margin-mobile': '16px',
+              gutter: '24px',
+            },
+            fontFamily: {
+              'display-lg': ['Plus Jakarta Sans'],
+              'body-lg': ['Plus Jakarta Sans'],
+              'headline-lg': ['Plus Jakarta Sans'],
+              'label-md': ['Plus Jakarta Sans'],
+              'headline-md': ['Plus Jakarta Sans'],
+              'body-md': ['Plus Jakarta Sans'],
+              'label-sm': ['Plus Jakarta Sans'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .islamic-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l2.5 12.5L45 15l-12.5 2.5L30 30l-2.5-12.5L15 15l12.5-2.5z' fill='%23006c4a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+    </style>
+  </head>
+  <body class="bg-background font-body-md text-on-background islamic-pattern">
+    <!-- Side Navigation Bar -->
+    <aside
+      class="fixed left-0 top-0 h-full w-[280px] bg-surface-container-highest shadow-[4px_0_24px_rgba(5,150,105,0.08)] flex flex-col py-base px-4 z-50"
+    >
+      <div class="flex items-center gap-3 mb-10 px-2">
+        <div
+          class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white"
+        >
+          <span
+            class="material-symbols-outlined"
+            style="font-variation-settings: 'FILL' 1"
+            >auto_stories</span
+          >
+        </div>
+        <div>
+          <h1
+            class="font-display-lg text-[24px] font-bold text-primary leading-none"
+          >
+            SantriExam
+          </h1>
+          <p class="font-label-sm text-on-surface-variant">Digital Madrasah</p>
+        </div>
+      </div>
+      <nav class="flex-1 space-y-2">
+        <!-- Active Tab: Dashboard -->
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 border-tertiary-container bg-primary-container/10 text-primary font-bold transition-all duration-300 ease-in-out scale-[0.98] active:scale-95"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-body-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-container/5 transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">menu_book</span>
+          <span class="font-body-md">Question Bank</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-container/5 transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">timer</span>
+          <span class="font-body-md">Exam Sessions</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-container/5 transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">groups</span>
+          <span class="font-body-md">Student Records</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-container/5 transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-body-md">System Settings</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-container/5 transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">help_outline</span>
+          <span class="font-body-md">Support</span>
+        </a>
+      </nav>
+      <button
+        class="w-full bg-primary text-white py-3 rounded-xl font-bold mb-6 flex items-center justify-center gap-2 shadow-md hover:brightness-110 active:scale-95 transition-all"
+      >
+        <span class="material-symbols-outlined">add</span>
+        New Exam
+      </button>
+      <div class="border-t border-outline-variant pt-4">
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-error transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-body-md">Logout</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content Shell -->
+    <main class="ml-[280px] min-h-screen">
+      <!-- Top App Bar -->
+      <header
+        class="sticky top-0 z-40 h-16 w-full flex justify-between items-center px-margin-desktop bg-surface-container-lowest/80 backdrop-blur-md border-b border-outline-variant"
+      >
+        <div class="flex items-center gap-gutter flex-1">
+          <div class="relative w-full max-w-md">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              >search</span
+            >
+            <input
+              class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-body-md focus:ring-2 focus:ring-primary/20"
+              placeholder="Search data, exams, or students..."
+              type="text"
+            />
+          </div>
+          <div class="hidden md:flex gap-6">
+            <a
+              class="font-label-md text-on-surface-variant hover:text-primary transition-colors"
+              href="#"
+              >Exams</a
+            >
+            <a
+              class="font-label-md text-on-surface-variant hover:text-primary transition-colors"
+              href="#"
+              >Results</a
+            >
+            <a
+              class="font-label-md text-on-surface-variant hover:text-primary transition-colors"
+              href="#"
+              >Schedule</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-outline-variant text-label-md font-bold text-on-surface-variant hover:bg-surface-container-high transition-colors"
+          >
+            <span class="material-symbols-outlined text-[18px]">cached</span>
+            Role Switcher
+          </button>
+          <div class="flex items-center gap-1">
+            <button
+              class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full relative"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+              <span
+                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+              ></span>
+            </button>
+            <button
+              class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full"
+            >
+              <span class="material-symbols-outlined">help</span>
+            </button>
+          </div>
+          <div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <p class="font-label-md font-bold text-on-surface leading-none">
+                Ustadz Ahmad
+              </p>
+              <p class="font-label-sm text-on-surface-variant">Super Admin</p>
+            </div>
+            <img
+              alt="User Avatar"
+              class="w-10 h-10 rounded-full border-2 border-primary-container/20 object-cover"
+              data-alt="A professional headshot of a middle-aged man with a neat beard and a warm expression, wearing traditional academic attire in a bright office setting. The lighting is soft and professional, emphasizing a modern corporate yet serene academic vibe. The background is slightly blurred with soft emerald and white tones consistent with a Digital Madrasah brand."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCiDaUXrrBttMscddgulYo4QtBJ2dfeU9Ke8_9mGKEhzmcdzdtxMfuzBAVL0Xal2CsZKQeHv_HG5N4LkJosgLciq5AFy-W8kPpFdNwgq9AQq7A0C9xxBaFZx9tYgQx9HUCgcFXel6pGvBSJmgpu-VxGOsgR_zfsXEPz844mo7fvEetDL3gHJKwI_5ZQSN9y0Ke8B8w-OclR793PcjH9S4oQ9x48t6nP1g6999KKXp1bAJbm-b7WtBJ6Gv8T9ObQ_CATFVs4ZA7kIMz"
+            />
+          </div>
+        </div>
+      </header>
+      <!-- Dashboard Content -->
+      <div class="p-margin-desktop max-w-container-max mx-auto">
+        <!-- Header Section -->
+        <div class="mb-8">
+          <h2 class="font-headline-lg text-on-surface mb-1">
+            Super Admin Dashboard
+          </h2>
+          <p class="font-body-md text-on-surface-variant">
+            Assalamu'alaikum, Ustadz. Here's what's happening in SantriExam
+            today.
+          </p>
+        </div>
+        <!-- Stats Grid -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-8"
+        >
+          <!-- Card 1 -->
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 flex flex-col hover:shadow-md transition-shadow"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <span class="p-2 bg-primary/10 text-primary rounded-lg">
+                <span class="material-symbols-outlined">group</span>
+              </span>
+              <span
+                class="text-primary text-label-sm font-bold flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-[16px]"
+                  >trending_up</span
+                >
+                +12%
+              </span>
+            </div>
+            <p class="text-label-md text-on-surface-variant font-medium">
+              Total Santri
+            </p>
+            <h3 class="text-headline-md font-bold text-on-surface mb-4">
+              1,284
+            </h3>
+            <div class="h-10 w-full mt-auto">
+              <svg
+                class="w-full h-full stroke-primary fill-none stroke-[2] opacity-60"
+                viewbox="0 0 100 30"
+              >
+                <path
+                  d="M0 25 Q 10 5, 20 20 T 40 10 T 60 25 T 80 5 T 100 15"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 flex flex-col hover:shadow-md transition-shadow"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <span
+                class="p-2 bg-secondary-container/30 text-secondary rounded-lg"
+              >
+                <span class="material-symbols-outlined">school</span>
+              </span>
+              <span
+                class="text-secondary text-label-sm font-bold flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-[16px]"
+                  >horizontal_rule</span
+                >
+                0%
+              </span>
+            </div>
+            <p class="text-label-md text-on-surface-variant font-medium">
+              Total Guru
+            </p>
+            <h3 class="text-headline-md font-bold text-on-surface mb-4">86</h3>
+            <div class="h-10 w-full mt-auto">
+              <svg
+                class="w-full h-full stroke-secondary fill-none stroke-[2] opacity-60"
+                viewbox="0 0 100 30"
+              >
+                <path
+                  d="M0 15 L 20 15 L 40 18 L 60 12 L 80 15 L 100 15"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 flex flex-col hover:shadow-md transition-shadow"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <span
+                class="p-2 bg-tertiary-container/10 text-tertiary rounded-lg"
+              >
+                <span class="material-symbols-outlined">description</span>
+              </span>
+              <span
+                class="text-primary text-label-sm font-bold flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-[16px]"
+                  >trending_up</span
+                >
+                +5%
+              </span>
+            </div>
+            <p class="text-label-md text-on-surface-variant font-medium">
+              Total Exams
+            </p>
+            <h3 class="text-headline-md font-bold text-on-surface mb-4">432</h3>
+            <div class="h-10 w-full mt-auto">
+              <svg
+                class="w-full h-full stroke-tertiary fill-none stroke-[2] opacity-60"
+                viewbox="0 0 100 30"
+              >
+                <path
+                  d="M0 20 Q 20 10, 40 25 T 80 15 T 100 5"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 flex flex-col hover:shadow-md transition-shadow"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <span
+                class="p-2 bg-primary-container text-on-primary-container rounded-lg"
+              >
+                <span class="material-symbols-outlined">online_prediction</span>
+              </span>
+              <div class="flex items-center gap-1">
+                <span class="relative flex h-2 w-2">
+                  <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"
+                  ></span>
+                  <span
+                    class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"
+                  ></span>
+                </span>
+                <span class="text-primary-container text-label-sm font-bold"
+                  >LIVE</span
+                >
+              </div>
+            </div>
+            <p class="text-label-md text-on-surface-variant font-medium">
+              Active Sessions
+            </p>
+            <h3 class="text-headline-md font-bold text-on-surface mb-4">12</h3>
+            <div class="h-10 w-full mt-auto">
+              <svg
+                class="w-full h-full stroke-primary-container fill-none stroke-[2]"
+                viewbox="0 0 100 30"
+              >
+                <path
+                  d="M0 30 L 10 20 L 20 25 L 30 5 L 40 15 L 50 10 L 60 20 L 70 5 L 80 15 L 90 25 L 100 0"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!-- Bento Layout Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+          <!-- Main Activity Chart -->
+          <div
+            class="lg:col-span-2 bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/30"
+          >
+            <div class="flex justify-between items-center mb-8">
+              <div>
+                <h4 class="font-headline-md text-on-surface">Exam Activity</h4>
+                <p class="font-label-sm text-on-surface-variant">
+                  Volume of exams taken per day over the last week
+                </p>
+              </div>
+              <select
+                class="bg-surface-container-low border-none rounded-lg text-label-md focus:ring-primary/20"
+              >
+                <option>Last 7 Days</option>
+                <option>Last 30 Days</option>
+              </select>
+            </div>
+            <div class="relative h-64 w-full">
+              <!-- Chart Placeholder Visual -->
+              <div class="absolute inset-0 flex items-end justify-between px-2">
+                <div
+                  class="w-[12%] bg-primary-container/20 h-[40%] rounded-t-lg relative group"
+                >
+                  <div
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    45 Exams
+                  </div>
+                </div>
+                <div
+                  class="w-[12%] bg-primary-container/40 h-[65%] rounded-t-lg relative group"
+                >
+                  <div
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    78 Exams
+                  </div>
+                </div>
+                <div
+                  class="w-[12%] bg-primary-container/20 h-[35%] rounded-t-lg relative group"
+                >
+                  <div
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    32 Exams
+                  </div>
+                </div>
+                <div
+                  class="w-[12%] bg-primary-container/80 h-[85%] rounded-t-lg relative group"
+                >
+                  <div
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    112 Exams
+                  </div>
+                </div>
+                <div
+                  class="w-[12%] bg-primary-container/50 h-[55%] rounded-t-lg relative group"
+                >
+                  <div
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    64 Exams
+                  </div>
+                </div>
+                <div
+                  class="w-[12%] bg-primary-container/60 h-[75%] rounded-t-lg relative group"
+                >
+                  <div
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    92 Exams
+                  </div>
+                </div>
+                <div
+                  class="w-[12%] bg-primary-container/30 h-[45%] rounded-t-lg relative group"
+                >
+                  <div
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    51 Exams
+                  </div>
+                </div>
+              </div>
+              <!-- Axis Labels -->
+              <div
+                class="absolute -bottom-6 w-full flex justify-between px-2 text-[10px] font-bold text-on-surface-variant"
+              >
+                <span>MON</span><span>TUE</span><span>WED</span><span>THU</span
+                ><span>FRI</span><span>SAT</span><span>SUN</span>
+              </div>
+            </div>
+          </div>
+          <!-- Role Distribution Doughnut -->
+          <div
+            class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/30"
+          >
+            <h4 class="font-headline-md text-on-surface mb-1">
+              Role Distribution
+            </h4>
+            <p class="font-label-sm text-on-surface-variant mb-8">
+              User population by category
+            </p>
+            <div class="relative flex justify-center mb-8">
+              <svg class="w-48 h-48 -rotate-90">
+                <!-- Student Segment -->
+                <circle
+                  cx="96"
+                  cy="96"
+                  fill="none"
+                  r="80"
+                  stroke="#e6e8ea"
+                  stroke-width="16"
+                ></circle>
+                <circle
+                  cx="96"
+                  cy="96"
+                  fill="none"
+                  r="80"
+                  stroke="#006948"
+                  stroke-dasharray="502"
+                  stroke-dashoffset="120"
+                  stroke-width="16"
+                ></circle>
+                <!-- Teacher Segment -->
+                <circle
+                  cx="96"
+                  cy="96"
+                  fill="none"
+                  r="80"
+                  stroke="#515f74"
+                  stroke-dasharray="502"
+                  stroke-dashoffset="440"
+                  stroke-width="16"
+                ></circle>
+              </svg>
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center"
+              >
+                <span class="text-headline-md font-bold text-on-surface"
+                  >1,385</span
+                >
+                <span class="text-label-sm text-on-surface-variant"
+                  >Total Users</span
+                >
+              </div>
+            </div>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-label-md">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-primary"></span>
+                  <span class="text-on-surface-variant">Santri</span>
+                </div>
+                <span class="font-bold">1,284</span>
+              </div>
+              <div class="flex items-center justify-between text-label-md">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-secondary"></span>
+                  <span class="text-on-surface-variant">Guru</span>
+                </div>
+                <span class="font-bold">86</span>
+              </div>
+              <div class="flex items-center justify-between text-label-md">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-outline-variant"></span>
+                  <span class="text-on-surface-variant">Admins</span>
+                </div>
+                <span class="font-bold">15</span>
+              </div>
+            </div>
+          </div>
+          <!-- Latest Activities Table -->
+          <div
+            class="lg:col-span-2 bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/30"
+          >
+            <div class="flex justify-between items-center mb-6">
+              <h4 class="font-headline-md text-on-surface">
+                Latest Activities
+              </h4>
+              <button
+                class="text-primary font-bold text-label-md hover:underline"
+              >
+                View All Logs
+              </button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                  <tr class="text-left bg-surface-container-low">
+                    <th
+                      class="px-4 py-3 font-label-sm text-on-surface-variant uppercase tracking-wider rounded-l-lg"
+                    >
+                      User
+                    </th>
+                    <th
+                      class="px-4 py-3 font-label-sm text-on-surface-variant uppercase tracking-wider"
+                    >
+                      Action
+                    </th>
+                    <th
+                      class="px-4 py-3 font-label-sm text-on-surface-variant uppercase tracking-wider"
+                    >
+                      Date &amp; Time
+                    </th>
+                    <th
+                      class="px-4 py-3 font-label-sm text-on-surface-variant uppercase tracking-wider rounded-r-lg text-right"
+                    >
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant/20">
+                  <tr>
+                    <td class="px-4 py-4">
+                      <div class="flex items-center gap-3">
+                        <div
+                          class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[12px] font-bold"
+                        >
+                          ZH
+                        </div>
+                        <span class="text-body-md font-medium"
+                          >Zaid Hamdan</span
+                        >
+                      </div>
+                    </td>
+                    <td class="px-4 py-4 text-body-md text-on-surface-variant">
+                      Submitted "Fiqh Exam"
+                    </td>
+                    <td class="px-4 py-4 text-body-md text-on-surface-variant">
+                      Today, 10:45 AM
+                    </td>
+                    <td class="px-4 py-4 text-right">
+                      <span
+                        class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-label-sm font-bold"
+                        >COMPLETED</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-4">
+                      <div class="flex items-center gap-3">
+                        <div
+                          class="w-8 h-8 rounded-full bg-secondary-container/30 text-secondary flex items-center justify-center text-[12px] font-bold"
+                        >
+                          UF
+                        </div>
+                        <span class="text-body-md font-medium"
+                          >Ustadz Farhan</span
+                        >
+                      </div>
+                    </td>
+                    <td class="px-4 py-4 text-body-md text-on-surface-variant">
+                      Created "Hadith Quiz"
+                    </td>
+                    <td class="px-4 py-4 text-body-md text-on-surface-variant">
+                      Today, 09:12 AM
+                    </td>
+                    <td class="px-4 py-4 text-right">
+                      <span
+                        class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-label-sm font-bold"
+                        >COMPLETED</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-4">
+                      <div class="flex items-center gap-3">
+                        <div
+                          class="w-8 h-8 rounded-full bg-tertiary-container/10 text-tertiary flex items-center justify-center text-[12px] font-bold"
+                        >
+                          MY
+                        </div>
+                        <span class="text-body-md font-medium"
+                          >Maryam Yusuf</span
+                        >
+                      </div>
+                    </td>
+                    <td class="px-4 py-4 text-body-md text-on-surface-variant">
+                      Started "Nahwu Basics"
+                    </td>
+                    <td class="px-4 py-4 text-body-md text-on-surface-variant">
+                      Today, 08:30 AM
+                    </td>
+                    <td class="px-4 py-4 text-right">
+                      <span
+                        class="inline-block px-3 py-1 rounded-full bg-secondary-container/30 text-secondary text-label-sm font-bold"
+                        >PENDING</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Realtime System Status -->
+          <div
+            class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/30 flex flex-col"
+          >
+            <h4 class="font-headline-md text-on-surface mb-6">System Health</h4>
+            <div class="space-y-6 flex-1">
+              <div
+                class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20"
+              >
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-label-md font-bold text-on-surface"
+                    >Main Server</span
+                  >
+                  <div class="flex items-center gap-2">
+                    <span class="relative flex h-3 w-3">
+                      <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+                      ></span>
+                      <span
+                        class="relative inline-flex rounded-full h-3 w-3 bg-primary"
+                      ></span>
+                    </span>
+                    <span class="text-primary text-label-sm font-bold"
+                      >ONLINE</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="w-full bg-outline-variant/20 h-1.5 rounded-full overflow-hidden"
+                >
+                  <div class="bg-primary h-full w-[94%]"></div>
+                </div>
+                <p class="text-[10px] text-on-surface-variant mt-2">
+                  Uptime: 99.98% • Latency: 24ms
+                </p>
+              </div>
+              <div
+                class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20"
+              >
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-label-md font-bold text-on-surface"
+                    >Database</span
+                  >
+                  <div class="flex items-center gap-2">
+                    <span class="relative flex h-3 w-3">
+                      <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+                      ></span>
+                      <span
+                        class="relative inline-flex rounded-full h-3 w-3 bg-primary"
+                      ></span>
+                    </span>
+                    <span class="text-primary text-label-sm font-bold"
+                      >STABLE</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="w-full bg-outline-variant/20 h-1.5 rounded-full overflow-hidden"
+                >
+                  <div class="bg-primary h-full w-[88%]"></div>
+                </div>
+                <p class="text-[10px] text-on-surface-variant mt-2">
+                  Capacity: 42% utilized
+                </p>
+              </div>
+              <div
+                class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20"
+              >
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-label-md font-bold text-on-surface"
+                    >CDN Edge</span
+                  >
+                  <div class="flex items-center gap-2">
+                    <span class="relative flex h-3 w-3">
+                      <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+                      ></span>
+                      <span
+                        class="relative inline-flex rounded-full h-3 w-3 bg-primary"
+                      ></span>
+                    </span>
+                    <span class="text-primary text-label-sm font-bold"
+                      >ACTIVE</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="w-full bg-outline-variant/20 h-1.5 rounded-full overflow-hidden"
+                >
+                  <div class="bg-primary h-full w-[100%]"></div>
+                </div>
+                <p class="text-[10px] text-on-surface-variant mt-2">
+                  Regions: 12 Nodes Global
+                </p>
+              </div>
+            </div>
+            <button
+              class="mt-8 w-full py-2 bg-surface-container-high rounded-lg text-label-md font-bold text-secondary hover:bg-secondary hover:text-white transition-all"
+            >
+              View System Logs
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,657 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>User Management | SantriExam</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-tertiary-fixed': '#410004',
+              background: '#f7f9fb',
+              'on-error': '#ffffff',
+              outline: '#6d7a72',
+              'surface-container-high': '#e6e8ea',
+              'on-secondary-container': '#57657a',
+              'on-secondary': '#ffffff',
+              surface: '#f7f9fb',
+              error: '#ba1a1a',
+              'primary-container': '#00855d',
+              'surface-container-low': '#f2f4f6',
+              'surface-bright': '#f7f9fb',
+              'surface-tint': '#006c4a',
+              'surface-variant': '#e0e3e5',
+              'secondary-container': '#d5e3fc',
+              'on-tertiary-container': '#fffbff',
+              'outline-variant': '#bccac0',
+              'on-secondary-fixed': '#0d1c2e',
+              'inverse-surface': '#2d3133',
+              'on-tertiary-fixed-variant': '#7f2928',
+              'tertiary-fixed-dim': '#ffb3ae',
+              'on-primary-fixed-variant': '#005137',
+              'error-container': '#ffdad6',
+              'on-primary-container': '#f5fff7',
+              'on-tertiary': '#ffffff',
+              'on-surface': '#191c1e',
+              tertiary: '#9b3e3b',
+              'primary-fixed': '#85f8c4',
+              'surface-container': '#eceef0',
+              secondary: '#515f74',
+              'on-error-container': '#93000a',
+              'surface-container-lowest': '#ffffff',
+              'tertiary-fixed': '#ffdad7',
+              'tertiary-container': '#ba5551',
+              'secondary-fixed-dim': '#b9c7df',
+              'surface-container-highest': '#e0e3e5',
+              'on-background': '#191c1e',
+              'primary-fixed-dim': '#68dba9',
+              'inverse-primary': '#68dba9',
+              'secondary-fixed': '#d5e3fc',
+              'inverse-on-surface': '#eff1f3',
+              'on-primary': '#ffffff',
+              primary: '#006948',
+              'on-primary-fixed': '#002114',
+              'surface-dim': '#d8dadc',
+              'on-surface-variant': '#3d4a42',
+              'on-secondary-fixed-variant': '#3a485b',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              'margin-desktop': '32px',
+              'container-max': '1440px',
+              base: '8px',
+              'margin-mobile': '16px',
+              gutter: '24px',
+            },
+            fontFamily: {
+              'display-lg': ['Plus Jakarta Sans'],
+              'body-lg': ['Plus Jakarta Sans'],
+              'headline-lg': ['Plus Jakarta Sans'],
+              'label-md': ['Plus Jakarta Sans'],
+              'headline-md': ['Plus Jakarta Sans'],
+              'body-md': ['Plus Jakarta Sans'],
+              'label-sm': ['Plus Jakarta Sans'],
+            },
+            fontSize: {
+              'display-lg': [
+                '48px',
+                {
+                  lineHeight: '60px',
+                  letterSpacing: '-0.02em',
+                  fontWeight: '700',
+                },
+              ],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'headline-lg': [
+                '30px',
+                { lineHeight: '38px', fontWeight: '600' },
+              ],
+              'label-md': ['14px', { lineHeight: '20px', fontWeight: '500' }],
+              'headline-md': [
+                '24px',
+                { lineHeight: '32px', fontWeight: '600' },
+              ],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'label-sm': [
+                '12px',
+                {
+                  lineHeight: '16px',
+                  letterSpacing: '0.05em',
+                  fontWeight: '600',
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #f7f9fb;
+      }
+      .geometric-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 30-15 30-15-30z' fill='%23006c4a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background">
+    <!-- Sidebar Navigation Shell -->
+    <aside
+      class="fixed left-0 top-0 h-full w-[280px] bg-surface-container-highest dark:bg-inverse-surface shadow-[4px_0_24px_rgba(5,150,105,0.08)] flex flex-col h-full py-base px-4 z-50"
+    >
+      <div class="mb-10 px-2 flex items-center gap-3">
+        <div
+          class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center"
+        >
+          <span
+            class="material-symbols-outlined text-white"
+            style="font-variation-settings: 'FILL' 1"
+            >school</span
+          >
+        </div>
+        <div>
+          <h1
+            class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed-dim leading-none"
+          >
+            SantriExam
+          </h1>
+          <p class="font-label-sm text-label-sm text-on-surface-variant">
+            Digital Madrasah
+          </p>
+        </div>
+      </div>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-primary-container/5 transition-all duration-300 ease-in-out scale-[0.98] active:scale-95"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-body-md text-body-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-primary-container/5 transition-all duration-300 ease-in-out scale-[0.98] active:scale-95"
+          href="#"
+        >
+          <span class="material-symbols-outlined">menu_book</span>
+          <span class="font-body-md text-body-md">Question Bank</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-primary-container/5 transition-all duration-300 ease-in-out scale-[0.98] active:scale-95"
+          href="#"
+        >
+          <span class="material-symbols-outlined">timer</span>
+          <span class="font-body-md text-body-md">Exam Sessions</span>
+        </a>
+        <!-- Active State: Student Records -->
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 border-tertiary-container bg-primary-container/10 text-primary font-bold transition-all duration-300 ease-in-out scale-[0.98] active:scale-95"
+          href="#"
+        >
+          <span
+            class="material-symbols-outlined"
+            style="font-variation-settings: 'FILL' 1"
+            >groups</span
+          >
+          <span class="font-body-md text-body-md">Student Records</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-primary-container/5 transition-all duration-300 ease-in-out scale-[0.98] active:scale-95"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-body-md text-body-md">System Settings</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-primary-container/5 transition-all duration-300 ease-in-out scale-[0.98] active:scale-95"
+          href="#"
+        >
+          <span class="material-symbols-outlined">help_outline</span>
+          <span class="font-body-md text-body-md">Support</span>
+        </a>
+      </nav>
+      <div class="mt-auto border-t border-outline-variant pt-4">
+        <button
+          class="w-full mb-4 bg-primary text-white py-3 px-4 rounded-xl font-label-md flex items-center justify-center gap-2 hover:bg-primary-container transition-colors duration-200"
+        >
+          <span class="material-symbols-outlined">add</span>
+          New Exam
+        </button>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-body-md text-body-md">Logout</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Top App Bar -->
+    <header
+      class="fixed top-0 right-0 left-[280px] h-16 bg-surface-container-lowest/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-margin-desktop z-40 shadow-sm"
+    >
+      <div class="flex items-center flex-1 max-w-xl">
+        <div class="relative w-full group">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          >
+          <input
+            class="w-full bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 text-label-md focus:ring-2 focus:ring-primary transition-all"
+            placeholder="Search users by name, ID or role..."
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-4 text-on-surface-variant">
+          <button
+            class="hover:bg-surface-container-high p-2 rounded-full transition-colors"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <button
+            class="hover:bg-surface-container-high p-2 rounded-full transition-colors"
+          >
+            <span class="material-symbols-outlined">help</span>
+          </button>
+        </div>
+        <div class="h-8 w-px bg-outline-variant"></div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <p class="font-label-md text-on-surface font-bold">Admin Super</p>
+            <p class="font-label-sm text-on-surface-variant text-[10px]">
+              Super Admin
+            </p>
+          </div>
+          <img
+            alt="Admin Profile"
+            class="w-10 h-10 rounded-full border-2 border-primary-fixed"
+            data-alt="A high-quality studio portrait of a professional male administrator in his late 40s. He is wearing a clean, modern white shirt and has a gentle, authoritative expression. The background is a soft, blurred office setting with high-key lighting, maintaining a bright and serene academic atmosphere with emerald green accents."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW3zEC7fUKgjBT2HRzOTWmkYFNOFThWrP0E8TfKxJX1gPbNlIX5owrpsbOyNZoaqvs6aOf0mK_wk2jPTtw6TQP54nYfSG2e7-C621hxz230-Iem8fxlgVCnY3v9jx5Z77KUsnrB-FkEl40BQ_bRFzzB5UzoSUwKqgY0YKNHmmgIWLHNtNBFI5EJDYNTUElVVAjxcyZbyz6BcvlIxo-HbcZo4Jxv4rQnRaQAsrxRMRF9_VTW9_aJVoi487_eRXIXtEEvthXqPBtB-KF"
+          />
+        </div>
+      </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main
+      class="ml-[280px] pt-24 px-margin-desktop pb-12 geometric-pattern min-h-screen"
+    >
+      <!-- Header Actions -->
+      <div
+        class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4"
+      >
+        <div>
+          <nav class="flex gap-2 mb-2 text-label-sm text-on-surface-variant">
+            <span>Administration</span>
+            <span>/</span>
+            <span class="text-primary font-bold">User Management</span>
+          </nav>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">
+            User Management
+          </h2>
+        </div>
+        <div class="flex items-center gap-3">
+          <button
+            class="flex items-center gap-2 px-4 py-2 bg-surface-container-lowest border border-outline-variant text-on-surface-variant rounded-lg font-label-md hover:bg-surface-container-high transition-all active:opacity-80"
+          >
+            <span class="material-symbols-outlined">upload</span>
+            Import
+          </button>
+          <button
+            class="flex items-center gap-2 px-4 py-2 bg-surface-container-lowest border border-outline-variant text-on-surface-variant rounded-lg font-label-md hover:bg-surface-container-high transition-all active:opacity-80"
+          >
+            <span class="material-symbols-outlined">download</span>
+            Export
+          </button>
+          <button
+            class="flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-lg font-label-md hover:bg-primary-container transition-all active:opacity-80 shadow-md"
+          >
+            <span class="material-symbols-outlined">person_add</span>
+            Add User
+          </button>
+        </div>
+      </div>
+      <!-- Bento Stats Row -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-8">
+        <div
+          class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_2px_4px_rgba(5,150,105,0.08)] border border-outline-variant/30 group hover:shadow-md transition-shadow"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2 bg-primary/10 rounded-lg text-primary">
+              <span class="material-symbols-outlined">group</span>
+            </div>
+            <span class="text-primary font-bold text-label-sm">+12%</span>
+          </div>
+          <p class="text-on-surface-variant font-label-md">Total Users</p>
+          <p class="text-headline-md font-display-lg text-on-surface">1,284</p>
+        </div>
+        <div
+          class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_2px_4px_rgba(5,150,105,0.08)] border border-outline-variant/30 group hover:shadow-md transition-shadow"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2 bg-tertiary-container/10 text-tertiary">
+              <span class="material-symbols-outlined">school</span>
+            </div>
+            <span class="text-tertiary font-bold text-label-sm">Active</span>
+          </div>
+          <p class="text-on-surface-variant font-label-md">Santri</p>
+          <p class="text-headline-md font-display-lg text-on-surface">1,120</p>
+        </div>
+        <div
+          class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_2px_4px_rgba(5,150,105,0.08)] border border-outline-variant/30 group hover:shadow-md transition-shadow"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2 bg-secondary-container text-secondary">
+              <span class="material-symbols-outlined">person_pin</span>
+            </div>
+            <span class="text-secondary font-bold text-label-sm"
+              >Permanent</span
+            >
+          </div>
+          <p class="text-on-surface-variant font-label-md">Guru</p>
+          <p class="text-headline-md font-display-lg text-on-surface">86</p>
+        </div>
+        <div
+          class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_2px_4px_rgba(5,150,105,0.08)] border border-outline-variant/30 group hover:shadow-md transition-shadow"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2 bg-surface-container-high text-on-surface-variant">
+              <span class="material-symbols-outlined">security</span>
+            </div>
+            <span class="text-on-surface-variant font-bold text-label-sm"
+              >Admin</span
+            >
+          </div>
+          <p class="text-on-surface-variant font-label-md">Pengawas</p>
+          <p class="text-headline-md font-display-lg text-on-surface">14</p>
+        </div>
+      </div>
+      <!-- Table Container -->
+      <div
+        class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(5,150,105,0.05)] border border-outline-variant/30 overflow-hidden"
+      >
+        <!-- Tabs -->
+        <div class="flex border-b border-outline-variant px-6">
+          <button
+            class="px-6 py-4 text-label-md font-bold text-primary border-b-2 border-primary"
+          >
+            Santri
+          </button>
+          <button
+            class="px-6 py-4 text-label-md font-medium text-on-surface-variant hover:text-primary transition-colors"
+          >
+            Guru
+          </button>
+          <button
+            class="px-6 py-4 text-label-md font-medium text-on-surface-variant hover:text-primary transition-colors"
+          >
+            Pengawas
+          </button>
+        </div>
+        <!-- Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr
+                class="bg-surface-container-low border-b border-outline-variant"
+              >
+                <th
+                  class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  User
+                </th>
+                <th
+                  class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  NIS / ID
+                </th>
+                <th
+                  class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Role
+                </th>
+                <th
+                  class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Class / Department
+                </th>
+                <th
+                  class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Status
+                </th>
+                <th
+                  class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider text-right"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant/30">
+              <!-- Row 1 -->
+              <tr class="hover:bg-surface-container-low/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <img
+                      alt="User"
+                      class="w-10 h-10 rounded-full object-cover shadow-sm"
+                      data-alt="A close-up portrait of a young male student in a clean academic uniform. The lighting is natural and bright, suggesting a scholarly environment. The background is a soft-focus library with emerald green books, following the minimalist and professional SantriExam aesthetic."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmJZa_M1EjUymtFAgZvhJrj7rlL6xcs-VPDQIWjCx7SAtSRJXaCKrPhYqRG73VV5PG3RvVL73T9pfUJRQL9sl0irZ_-4_viSub7UalTV7pA24ef_kPWirnBgdRoLgQnRCUy8bQV-ol0AkHkK_G6nNZZBvcxWxkkKSpsQtD5kT8ZltEocAuR6uSk-fcHA0yS-L7TIUO-lgnrkleHYnGvXnoftl6mldJMxEyt46xJi4F6Bult2FvT0BH7afZTohLOwawAFAcbsvqTqVa"
+                    />
+                    <div>
+                      <p class="font-label-md text-on-surface font-bold">
+                        Ahmad Fauzi
+                      </p>
+                      <p class="font-label-sm text-on-surface-variant">
+                        ahmad.f@santri.edu
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-body-md text-on-surface-variant">
+                  2023001045
+                </td>
+                <td class="px-6 py-4 text-body-md text-on-surface-variant">
+                  Santri
+                </td>
+                <td class="px-6 py-4 text-body-md text-on-surface-variant">
+                  XII-MIPA-1
+                </td>
+                <td class="px-6 py-4">
+                  <span
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary-container/10 text-primary"
+                  >
+                    Active
+                  </span>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="text-on-surface-variant hover:text-primary p-2 rounded-full transition-colors"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 2 -->
+              <tr class="hover:bg-surface-container-low/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <img
+                      alt="User"
+                      class="w-10 h-10 rounded-full object-cover shadow-sm"
+                      data-alt="A portrait of a young female student with a serene and focused expression. She is in a brightly lit modern classroom. The color palette is composed of soft whites and deep emerald greens, creating a professional and disciplined academic vibe."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtIAwQHVX3fK-Oa9FLmZdjj3nqOhU3_f743O4Af3onbz2Hdbvri-2nGrZSBfnQA4otEXJSIFbf-Jc4Mjp4TodHHUbUNief-AshYP9JbM5_nZO0rLzmhW1_0CDMWaO2ZUOvWNC_EdWigln9XajGSdCLL-yEljuSSlHdzYQdB2ytmQVWd6DGWXXIl2XBueozKY0DGzZnRmXZZNFt1eSPKU8Yb7goUIh11SawpcSuSNVYOKTSPGUUj91flD3Oox7p4eIBIjrToQUAWPxn"
+                    />
+                    <div>
+                      <p class="font-label-md text-on-surface font-bold">
+                        Siti Aminah
+                      </p>
+                      <p class="font-label-sm text-on-surface-variant">
+                        siti.a@santri.edu
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-body-md text-on-surface-variant">
+                  2023001082
+                </td>
+                <td class="px-6 py-4 text-body-md text-on-surface-variant">
+                  Santri
+                </td>
+                <td class="px-6 py-4 text-body-md text-on-surface-variant">
+                  XII-IPS-2
+                </td>
+                <td class="px-6 py-4">
+                  <span
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary-container/10 text-primary"
+                  >
+                    Active
+                  </span>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="text-on-surface-variant hover:text-primary p-2 rounded-full transition-colors"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 3 (Inactive) -->
+              <tr class="hover:bg-surface-container-low/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant"
+                    >
+                      <span class="material-symbols-outlined">person</span>
+                    </div>
+                    <div>
+                      <p class="font-label-md text-on-surface font-bold">
+                        Budi Santoso
+                      </p>
+                      <p class="font-label-sm text-on-surface-variant">
+                        budi.s@santri.edu
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-body-md text-on-surface-variant">
+                  2023001012
+                </td>
+                <td class="px-6 py-4 text-body-md text-on-surface-variant">
+                  Santri
+                </td>
+                <td class="px-6 py-4 text-body-md text-on-surface-variant">
+                  XI-MIPA-3
+                </td>
+                <td class="px-6 py-4">
+                  <span
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-secondary-fixed text-secondary"
+                  >
+                    Inactive
+                  </span>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="text-on-surface-variant hover:text-primary p-2 rounded-full transition-colors"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 4 -->
+              <tr class="hover:bg-surface-container-low/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <img
+                      alt="User"
+                      class="w-10 h-10 rounded-full object-cover shadow-sm"
+                      data-alt="A portrait of a male student wearing a modern vest and shirt, standing in a clean, high-tech educational environment. The lighting is soft and corporate, with emerald green subtle light leaks that harmonize with the SantriExam brand identity."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQX_B6dqPgChKO6KGgjA9bvAUyy4ONjpjULCK-mAnkL4K4nTHjSo44jIbtj9-7w-kmUJA_gCJDW2lZp9ROj87dRVv5NnwR1Q5xLZRUyX4EWMtxr9U-QlXImztGnZ6cOEuuq43W4ds05XSQvceUs0e9RUpbUp3st7iffH3HsOqNlboT7w6FSaAr_BOMPgnL_-Nld3du1GOAtJJAHBIxe_MQYNlQQU0AbLchQ2s4t9looos2Sh1n_eADqGnHIGKY3zngBDTfirYH7KmZ"
+                    />
+                    <div>
+                      <p class="font-label-md text-on-surface font-bold">
+                        Hafiz Ramadhan
+                      </p>
+                      <p class="font-label-sm text-on-surface-variant">
+                        hafiz.r@santri.edu
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-body-md text-on-surface-variant">
+                  2023001105
+                </td>
+                <td class="px-6 py-4 text-body-md text-on-surface-variant">
+                  Santri
+                </td>
+                <td class="px-6 py-4 text-body-md text-on-surface-variant">
+                  X-MIPA-1
+                </td>
+                <td class="px-6 py-4">
+                  <span
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary-container/10 text-primary"
+                  >
+                    Active
+                  </span>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="text-on-surface-variant hover:text-primary p-2 rounded-full transition-colors"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <div
+          class="px-6 py-4 bg-surface-container-low flex justify-between items-center"
+        >
+          <p class="font-label-sm text-on-surface-variant">
+            Showing 1-4 of 1,284 users
+          </p>
+          <div class="flex gap-2">
+            <button
+              class="p-2 rounded-lg border border-outline-variant hover:bg-surface-container-high transition-colors disabled:opacity-50"
+            >
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button
+              class="px-3 py-1 rounded-lg bg-primary text-white font-label-md"
+            >
+              1
+            </button>
+            <button
+              class="px-3 py-1 rounded-lg border border-outline-variant hover:bg-surface-container-high transition-colors"
+            >
+              2
+            </button>
+            <button
+              class="px-3 py-1 rounded-lg border border-outline-variant hover:bg-surface-container-high transition-colors"
+            >
+              3
+            </button>
+            <button
+              class="p-2 rounded-lg border border-outline-variant hover:bg-surface-container-high transition-colors"
+            >
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

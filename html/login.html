@@ -1,0 +1,348 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SantriExam - Digital Madrasah Login</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-tertiary-fixed': '#410004',
+              background: '#f7f9fb',
+              'on-error': '#ffffff',
+              outline: '#6d7a72',
+              'surface-container-high': '#e6e8ea',
+              'on-secondary-container': '#57657a',
+              'on-secondary': '#ffffff',
+              surface: '#f7f9fb',
+              error: '#ba1a1a',
+              'primary-container': '#00855d',
+              'surface-container-low': '#f2f4f6',
+              'surface-bright': '#f7f9fb',
+              'surface-tint': '#006c4a',
+              'surface-variant': '#e0e3e5',
+              'secondary-container': '#d5e3fc',
+              'on-tertiary-container': '#fffbff',
+              'outline-variant': '#bccac0',
+              'on-secondary-fixed': '#0d1c2e',
+              'inverse-surface': '#2d3133',
+              'on-tertiary-fixed-variant': '#7f2928',
+              'tertiary-fixed-dim': '#ffb3ae',
+              'on-primary-fixed-variant': '#005137',
+              'error-container': '#ffdad6',
+              'on-primary-container': '#f5fff7',
+              'on-tertiary': '#ffffff',
+              'on-surface': '#191c1e',
+              tertiary: '#9b3e3b',
+              'primary-fixed': '#85f8c4',
+              'surface-container': '#eceef0',
+              secondary: '#515f74',
+              'on-error-container': '#93000a',
+              'surface-container-lowest': '#ffffff',
+              'tertiary-fixed': '#ffdad7',
+              'tertiary-container': '#ba5551',
+              'secondary-fixed-dim': '#b9c7df',
+              'surface-container-highest': '#e0e3e5',
+              'on-background': '#191c1e',
+              'primary-fixed-dim': '#68dba9',
+              'inverse-primary': '#68dba9',
+              'secondary-fixed': '#d5e3fc',
+              'inverse-on-surface': '#eff1f3',
+              'on-primary': '#ffffff',
+              primary: '#006948',
+              'on-primary-fixed': '#002114',
+              'surface-dim': '#d8dadc',
+              'on-surface-variant': '#3d4a42',
+              'on-secondary-fixed-variant': '#3a485b',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              'margin-desktop': '32px',
+              'container-max': '1440px',
+              base: '8px',
+              'margin-mobile': '16px',
+              gutter: '24px',
+            },
+            fontFamily: {
+              'display-lg': ['Plus Jakarta Sans'],
+              'body-lg': ['Plus Jakarta Sans'],
+              'headline-lg': ['Plus Jakarta Sans'],
+              'label-md': ['Plus Jakarta Sans'],
+              'headline-md': ['Plus Jakarta Sans'],
+              'body-md': ['Plus Jakarta Sans'],
+              'label-sm': ['Plus Jakarta Sans'],
+            },
+            fontSize: {
+              'display-lg': [
+                '48px',
+                {
+                  lineHeight: '60px',
+                  letterSpacing: '-0.02em',
+                  fontWeight: '700',
+                },
+              ],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'headline-lg': [
+                '30px',
+                { lineHeight: '38px', fontWeight: '600' },
+              ],
+              'label-md': ['14px', { lineHeight: '20px', fontWeight: '500' }],
+              'headline-md': [
+                '24px',
+                { lineHeight: '32px', fontWeight: '600' },
+              ],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'label-sm': [
+                '12px',
+                {
+                  lineHeight: '16px',
+                  letterSpacing: '0.05em',
+                  fontWeight: '600',
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .islamic-pattern {
+        background-color: transparent;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l5 20h20l-15 10 5 20-15-10-15 10 5-20-15-10h20z' fill='%23006948' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+      }
+      .auth-glass {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background font-body-md text-on-background min-h-screen flex items-center justify-center p-margin-mobile md:p-0 islamic-pattern"
+  >
+    <main
+      class="w-full max-w-container-max md:h-[800px] flex flex-col md:flex-row overflow-hidden rounded-xl shadow-[0_20px_50px_rgba(5,150,105,0.08)] bg-surface-container-lowest"
+    >
+      <!-- Left Side: Visual Illustration Area -->
+      <section
+        class="hidden md:flex md:w-1/2 relative bg-primary items-center justify-center overflow-hidden"
+      >
+        <div class="absolute inset-0 z-0">
+          <img
+            alt="Modern Madrasah Architecture"
+            class="w-full h-full object-cover opacity-80"
+            data-alt="A serene, wide-angle photograph of a modern madrasah with clean white minimalist architecture and subtle Islamic geometric latticework on the windows. The scene is bathed in soft, warm golden hour sunlight, creating a peaceful and academic atmosphere. The background features lush green gardens that complement the emerald green color palette of the SantriExam brand. The overall mood is sophisticated, calm, and technologically advanced, blending traditional values with contemporary design."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpV1aCJGOiC6Ui2prldVvKunPRrqO75fmigfaZNKQEMdmkb8IzGHCZMM_CjdE5V0OiE_fQYf91et7GQLVyhHC0LovtoAD3_edWdyzm83KoLzRWUJrSsdVLMANumb2Fs2HAkUQ-9gJYbUnyeMOQAUIO9awOTMi70QWjTQ9S-E9WclYpncYZ040cF5E7tcGLI5uNCZNeyI6ndiO7Iw32vd00iMpskPeFXZljx54nBsO-vC46scIJeWrfJQ86rAqnN4bWZW3aBRrITyt6"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent"
+          ></div>
+        </div>
+        <div class="relative z-10 text-on-primary-container p-12 max-w-md">
+          <h1 class="font-display-lg text-display-lg mb-6 text-white">
+            Digital Excellence in Madrasah
+          </h1>
+          <p class="font-body-lg text-body-lg text-primary-fixed opacity-90">
+            A dedicated space for Santri and Educators to achieve academic goals
+            with integrity and modern technology.
+          </p>
+          <div class="mt-12 flex items-center gap-4">
+            <div class="flex -space-x-4">
+              <img
+                alt="Student"
+                class="w-10 h-10 rounded-full border-2 border-white"
+                data-alt="Close up portrait of a young male student wearing a traditional white cap, smiling gently in a brightly lit modern library. The image has a clean, high-key aesthetic with a focus on academic achievement and a professional, serene mood."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9QZVm-ydSp95BQiRJN1paTf0LY-95rS0raefI3mgSgPqnGvaScqiGbyilvrLu9t9SI4GbA8EE9xk_45-m3X60Af8pZA3pEr3LvFmH_PHkK0jJociQM6uyQNprwsDd8Nv5ZsD4uUqlqjg9GqndpnbtsQEKXG4EBP95kQMQbbZIHc4GKn20tFWI8NwUlVIYg7JNVAJwQisjmo_Jzh1XOFbit8AC3lZzRxG0nX_s8zvA83FMe3rFcTNw1f89gCKQ7LNYDTz9McJh0Sai"
+              />
+              <img
+                alt="Teacher"
+                class="w-10 h-10 rounded-full border-2 border-white"
+                data-alt="Close up portrait of a female teacher wearing a modest headscarf, looking focused and professional in a modern educational setting. Soft lighting highlights her determined expression, set against a background of blurred books and digital screens, reinforcing a scholarly atmosphere."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh1W8r2MDY4PV98D9DRKZ27CkatM-dCBDavSJ-RNketIjjlR_7bXyq01VYIoK8a738htPx0fhiCBUqXodWl3X2VbaKRlJdl92uvLWlIRVffVzhqDvKgV-VkU_zmtX-4A6VIGCQ_yjPKwcVteDFVx01Epdco-FjLLAZgItbMkWFLtMvfdNeqkbQt9ox_nnPuE15eR9XsZKPnlH29R6wlErlMl7kdREtXpH6u9mQtr_6mwTgXtjWYWshiodHt25OrzSQHGOltR_Yq1_x"
+              />
+              <img
+                alt="Admin"
+                class="w-10 h-10 rounded-full border-2 border-white"
+                data-alt="Portrait of a mature male administrator with a friendly expression, set in a clean corporate office environment with emerald green accents. The lighting is soft and professional, emphasizing trust, reliability, and modern Islamic values."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxXzZpCRQ_w9tbSIaxNEJm6K0_0fwoeVi1NFV0tI11VoUF1NS6GZvJiqR1_lBW-Ppqovc08Q_cxxhNvV6TOthwaM62r4aEuobafH9Ogs-Qjp4BESXMkGkwr7AsZPaEWcQenTEc92xuFztLo5mk44UDQPZlweXpYYb6xSXRAutZc5OPzTmESz-EK69KEgN4XexiIlhg_oDgsPLn4lGI_3eNoacYXpYgrHET9GWiL06StiSl3yJUjHRPhlTi8Do_Z0KUQe1L-TZB30na"
+              />
+            </div>
+            <span class="text-label-md font-label-md text-white"
+              >Joined by 10,000+ Santri</span
+            >
+          </div>
+        </div>
+      </section>
+      <!-- Right Side: Auth Card Area -->
+      <section
+        class="w-full md:w-1/2 flex flex-col items-center justify-center p-8 md:p-16 bg-surface-container-lowest"
+      >
+        <div class="w-full max-w-sm">
+          <!-- Branding -->
+          <div class="flex flex-col items-center md:items-start mb-12">
+            <div class="flex items-center gap-3 mb-2">
+              <div
+                class="w-12 h-12 bg-primary flex items-center justify-center rounded-xl shadow-lg"
+              >
+                <span
+                  class="material-symbols-outlined text-white text-3xl"
+                  data-weight="fill"
+                  >menu_book</span
+                >
+              </div>
+              <h2 class="font-headline-lg text-headline-lg text-primary">
+                SantriExam
+              </h2>
+            </div>
+            <p class="text-on-surface-variant font-body-md">
+              Welcome back, please login to your account.
+            </p>
+          </div>
+          <!-- Form -->
+          <form class="space-y-6">
+            <div class="space-y-2">
+              <label
+                class="block font-label-md text-label-md text-on-surface-variant"
+                for="id-input"
+                >Email or NIS (Student ID)</label
+              >
+              <div class="relative">
+                <span
+                  class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl"
+                  >person</span
+                >
+                <input
+                  class="w-full pl-10 pr-4 py-3 rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-2 focus:ring-primary-container/20 outline-none transition-all duration-200 font-body-md text-on-surface"
+                  id="id-input"
+                  placeholder="e.g. santri@madrasah.id"
+                  type="text"
+                />
+              </div>
+            </div>
+            <div class="space-y-2">
+              <label
+                class="block font-label-md text-label-md text-on-surface-variant"
+                for="password-input"
+                >Password</label
+              >
+              <div class="relative">
+                <span
+                  class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl"
+                  >lock</span
+                >
+                <input
+                  class="w-full pl-10 pr-10 py-3 rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-2 focus:ring-primary-container/20 outline-none transition-all duration-200 font-body-md text-on-surface"
+                  id="password-input"
+                  placeholder="••••••••"
+                  type="password"
+                />
+                <button
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-xl"
+                    >visibility</span
+                  >
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-2">
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input
+                  class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary-container/30 transition-all"
+                  type="checkbox"
+                />
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant group-hover:text-on-surface"
+                  >Remember me</span
+                >
+              </label>
+              <a
+                class="font-label-md text-label-md text-primary hover:text-primary-container font-semibold transition-colors"
+                href="#"
+                >Forgot password?</a
+              >
+            </div>
+            <button
+              class="w-full bg-primary text-white font-headline-md py-4 rounded-xl shadow-lg hover:bg-primary-container active:scale-[0.98] transition-all duration-200"
+              type="submit"
+            >
+              Sign In
+            </button>
+          </form>
+          <!-- Support/Footer -->
+          <div
+            class="mt-12 pt-8 border-t border-outline-variant/30 text-center"
+          >
+            <p class="font-label-md text-label-md text-on-surface-variant mb-4">
+              Having trouble logging in?
+            </p>
+            <div class="flex items-center justify-center gap-6">
+              <a
+                class="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity"
+                href="#"
+              >
+                <span class="material-symbols-outlined text-xl"
+                  >help_outline</span
+                >
+                <span class="font-label-sm text-label-sm uppercase"
+                  >Support</span
+                >
+              </a>
+              <a
+                class="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity"
+                href="#"
+              >
+                <span class="material-symbols-outlined text-xl">language</span>
+                <span class="font-label-sm text-label-sm uppercase"
+                  >Language</span
+                >
+              </a>
+            </div>
+          </div>
+          <div class="mt-8 text-center">
+            <p class="font-label-sm text-label-sm text-outline">
+              © 2024 SantriExam Digital Madrasah Ecosystem. <br />
+              Licensed for Educational Excellence.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Visual Accents -->
+    <div
+      class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-primary-fixed-dim to-primary"
+    ></div>
+    <div class="fixed bottom-4 right-4 hidden md:flex">
+      <div
+        class="bg-surface-container-highest px-4 py-2 rounded-full border border-outline-variant/30 flex items-center gap-2 shadow-sm"
+      >
+        <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+        <span class="text-label-sm font-label-sm text-on-surface-variant"
+          >System Status: Online</span
+        >
+      </div>
+    </div>
+  </body>
+</html>

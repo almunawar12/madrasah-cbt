@@ -1,0 +1,637 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SantriExam - Guru Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-tertiary-fixed': '#410004',
+              background: '#f7f9fb',
+              'on-error': '#ffffff',
+              outline: '#6d7a72',
+              'surface-container-high': '#e6e8ea',
+              'on-secondary-container': '#57657a',
+              'on-secondary': '#ffffff',
+              surface: '#f7f9fb',
+              error: '#ba1a1a',
+              'primary-container': '#00855d',
+              'surface-container-low': '#f2f4f6',
+              'surface-bright': '#f7f9fb',
+              'surface-tint': '#006c4a',
+              'surface-variant': '#e0e3e5',
+              'secondary-container': '#d5e3fc',
+              'on-tertiary-container': '#fffbff',
+              'outline-variant': '#bccac0',
+              'on-secondary-fixed': '#0d1c2e',
+              'inverse-surface': '#2d3133',
+              'on-tertiary-fixed-variant': '#7f2928',
+              'tertiary-fixed-dim': '#ffb3ae',
+              'on-primary-fixed-variant': '#005137',
+              'error-container': '#ffdad6',
+              'on-primary-container': '#f5fff7',
+              'on-tertiary': '#ffffff',
+              'on-surface': '#191c1e',
+              tertiary: '#9b3e3b',
+              'primary-fixed': '#85f8c4',
+              'surface-container': '#eceef0',
+              secondary: '#515f74',
+              'on-error-container': '#93000a',
+              'surface-container-lowest': '#ffffff',
+              'tertiary-fixed': '#ffdad7',
+              'tertiary-container': '#ba5551',
+              'secondary-fixed-dim': '#b9c7df',
+              'surface-container-highest': '#e0e3e5',
+              'on-background': '#191c1e',
+              'primary-fixed-dim': '#68dba9',
+              'inverse-primary': '#68dba9',
+              'secondary-fixed': '#d5e3fc',
+              'inverse-on-surface': '#eff1f3',
+              'on-primary': '#ffffff',
+              primary: '#006948',
+              'on-primary-fixed': '#002114',
+              'surface-dim': '#d8dadc',
+              'on-surface-variant': '#3d4a42',
+              'on-secondary-fixed-variant': '#3a485b',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              'margin-desktop': '32px',
+              'container-max': '1440px',
+              base: '8px',
+              'margin-mobile': '16px',
+              gutter: '24px',
+            },
+            fontFamily: {
+              'display-lg': ['Plus Jakarta Sans'],
+              'body-lg': ['Plus Jakarta Sans'],
+              'headline-lg': ['Plus Jakarta Sans'],
+              'label-md': ['Plus Jakarta Sans'],
+              'headline-md': ['Plus Jakarta Sans'],
+              'body-md': ['Plus Jakarta Sans'],
+              'label-sm': ['Plus Jakarta Sans'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .islamic-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l2.5 12.5L45 15l-12.5 2.5L30 30l-2.5-12.5L15 15l12.5-2.5z' fill='%23006948' fill-opacity='0.03'/%3E%3C/svg%3E");
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background min-h-screen">
+    <!-- SideNavBar -->
+    <aside
+      class="fixed left-0 top-0 h-full w-[280px] bg-surface-container-highest shadow-[4px_0_24px_rgba(5,150,105,0.08)] z-50 flex flex-col py-base px-4"
+    >
+      <div class="flex items-center gap-3 mb-10 px-2">
+        <div
+          class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary font-bold text-xl"
+        >
+          S
+        </div>
+        <div>
+          <h1
+            class="font-display-lg text-[20px] font-bold text-primary leading-tight"
+          >
+            SantriExam
+          </h1>
+          <p class="font-label-sm text-on-surface-variant">Digital Madrasah</p>
+        </div>
+      </div>
+      <button
+        class="mb-8 w-full bg-primary text-on-primary py-3 px-4 rounded-xl font-label-md flex items-center justify-center gap-2 shadow-md transition-all active:scale-95"
+      >
+        <span class="material-symbols-outlined">add</span>
+        New Exam
+      </button>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 border-tertiary-container bg-primary-container/10 text-primary font-bold transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-container/5 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">menu_book</span>
+          <span class="font-label-md">Question Bank</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-container/5 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">timer</span>
+          <span class="font-label-md">Exam Sessions</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-container/5 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">groups</span>
+          <span class="font-label-md">Student Records</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-container/5 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-label-md">System Settings</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-container/5 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">help_outline</span>
+          <span class="font-label-md">Support</span>
+        </a>
+      </nav>
+      <div class="mt-auto border-t border-outline-variant pt-4">
+        <a
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-error transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-label-md">Logout</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content Shell -->
+    <main class="ml-[280px] min-h-screen islamic-pattern">
+      <!-- TopAppBar -->
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface-container-lowest/80 backdrop-blur-md border-b border-outline-variant flex items-center justify-between px-margin-desktop"
+      >
+        <div class="flex items-center gap-8">
+          <div class="relative">
+            <span
+              class="absolute inset-y-0 left-3 flex items-center text-on-surface-variant"
+            >
+              <span class="material-symbols-outlined text-[20px]">search</span>
+            </span>
+            <input
+              class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-label-md w-64 focus:ring-2 focus:ring-primary"
+              placeholder="Search exams, questions..."
+              type="text"
+            />
+          </div>
+          <nav class="hidden md:flex items-center gap-6">
+            <a
+              class="font-label-md text-primary border-b-2 border-primary pb-1"
+              href="#"
+              >Exams</a
+            >
+            <a
+              class="font-label-md text-on-surface-variant hover:text-primary transition-colors"
+              href="#"
+              >Results</a
+            >
+            <a
+              class="font-label-md text-on-surface-variant hover:text-primary transition-colors"
+              href="#"
+              >Schedule</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full font-label-sm hover:opacity-90 transition-opacity"
+          >
+            Role Switcher
+          </button>
+          <div class="flex items-center gap-2">
+            <button
+              class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button
+              class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors"
+            >
+              <span class="material-symbols-outlined">help</span>
+            </button>
+          </div>
+          <div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <p class="font-label-md font-bold text-on-surface">
+                Ustadz Ahmad
+              </p>
+              <p
+                class="text-[10px] text-on-surface-variant uppercase tracking-wider"
+              >
+                Senior Instructor
+              </p>
+            </div>
+            <img
+              alt="User Avatar"
+              class="w-10 h-10 rounded-full border-2 border-primary-container"
+              data-alt="A professional portrait of a middle-aged academic instructor with a friendly expression. He is wearing a clean, modern attire suitable for an educational environment. The lighting is bright and even, against a soft-focus office background that reflects a high-end, contemporary digital madrasah aesthetic. The image is crisp with natural tones."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuApg5rZVW8Ju1stNlUgPrBC0B_K7_Tc4DArmw0X4wZ8_otOJRvccRjlMgC-9YJ--nncQSih5pcAEa63hEjcykhOjofe0A4aklq4fMkAyuFUsq-4j3A5eCNieSHpDhMykJhp8YtTdbeqzVMT6HLpAf0I32IV3W-pkWACKUgT3zoroPrF5QBAgMg7rvNI4pE4Rx9bewdx0bydB51yBSOftr0ESbTuHOWrP3YsOgcMivAia3CjhjXlu96JdZ2Yf70VtS1eJupfRUbu4YIo"
+            />
+          </div>
+        </div>
+      </header>
+      <!-- Dashboard Content -->
+      <div class="p-margin-desktop space-y-gutter max-w-container-max mx-auto">
+        <!-- Welcome Header -->
+        <div class="flex justify-between items-end">
+          <div>
+            <h2 class="font-headline-lg text-on-surface">
+              Ahlan wa Sahlan, Ustadz
+            </h2>
+            <p class="text-on-surface-variant font-body-md">
+              Here's an overview of your academic activities today.
+            </p>
+          </div>
+          <div
+            class="text-on-surface-variant font-label-md bg-surface-container-high px-4 py-2 rounded-lg"
+          >
+            Monday, 24 October 2023
+          </div>
+        </div>
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+          <!-- Stat Card 1 -->
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 hover:shadow-md transition-shadow"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-3 bg-primary-container/10 rounded-lg text-primary">
+                <span class="material-symbols-outlined">menu_book</span>
+              </div>
+              <span class="text-primary font-label-sm">+12 this week</span>
+            </div>
+            <p class="text-on-surface-variant font-label-md">Total Questions</p>
+            <h3 class="font-headline-md text-on-surface">1,284</h3>
+          </div>
+          <!-- Stat Card 2 -->
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 hover:shadow-md transition-shadow"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-3 bg-primary-container/10 rounded-lg text-primary">
+                <span class="material-symbols-outlined">assignment</span>
+              </div>
+            </div>
+            <p class="text-on-surface-variant font-label-md">Exams Created</p>
+            <h3 class="font-headline-md text-on-surface">42</h3>
+          </div>
+          <!-- Stat Card 3 (Gold Accent) -->
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-tertiary-container hover:shadow-md transition-shadow"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-3 bg-tertiary-fixed text-tertiary">
+                <span class="material-symbols-outlined">pending_actions</span>
+              </div>
+              <div
+                class="px-2 py-1 bg-tertiary-container text-white rounded text-[10px] font-bold uppercase"
+              >
+                Urgent
+              </div>
+            </div>
+            <p class="text-on-surface-variant font-label-md">Pending Grading</p>
+            <h3 class="font-headline-md text-tertiary">18</h3>
+          </div>
+          <!-- Stat Card 4 -->
+          <div
+            class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 hover:shadow-md transition-shadow"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-3 bg-primary-container/10 rounded-lg text-primary">
+                <span class="material-symbols-outlined">analytics</span>
+              </div>
+            </div>
+            <p class="text-on-surface-variant font-label-md">
+              Recent Avg. Score
+            </p>
+            <h3 class="font-headline-md text-on-surface">84.5%</h3>
+          </div>
+        </div>
+        <!-- Main Dashboard Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+          <!-- Left: Upcoming Exams & Recent Questions -->
+          <div class="lg:col-span-2 space-y-gutter">
+            <!-- Upcoming Exams -->
+            <section
+              class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden"
+            >
+              <div
+                class="p-6 border-b border-outline-variant flex justify-between items-center"
+              >
+                <h4
+                  class="font-headline-md text-on-surface flex items-center gap-2"
+                >
+                  <span class="material-symbols-outlined text-primary"
+                    >event_upcoming</span
+                  >
+                  Upcoming Exams
+                </h4>
+                <button class="text-primary font-label-sm hover:underline">
+                  View Calendar
+                </button>
+              </div>
+              <div class="divide-y divide-outline-variant">
+                <!-- Exam Row 1 -->
+                <div
+                  class="p-6 flex items-center justify-between hover:bg-surface-container-low transition-colors"
+                >
+                  <div class="flex items-center gap-4">
+                    <div
+                      class="w-12 h-12 bg-surface-container rounded-lg flex flex-col items-center justify-center text-on-surface-variant"
+                    >
+                      <span class="text-[10px] font-bold uppercase">Oct</span>
+                      <span class="text-lg font-bold">26</span>
+                    </div>
+                    <div>
+                      <h5 class="font-label-md font-bold text-on-surface">
+                        Fiqh Studies Mid-Term
+                      </h5>
+                      <p class="text-label-sm text-on-surface-variant">
+                        Class 12A • 09:00 AM • 45 Students
+                      </p>
+                    </div>
+                  </div>
+                  <span
+                    class="px-3 py-1 bg-primary-container/10 text-primary text-label-sm rounded-full"
+                    >Ready</span
+                  >
+                </div>
+                <!-- Exam Row 2 -->
+                <div
+                  class="p-6 flex items-center justify-between hover:bg-surface-container-low transition-colors"
+                >
+                  <div class="flex items-center gap-4">
+                    <div
+                      class="w-12 h-12 bg-surface-container rounded-lg flex flex-col items-center justify-center text-on-surface-variant"
+                    >
+                      <span class="text-[10px] font-bold uppercase">Oct</span>
+                      <span class="text-lg font-bold">28</span>
+                    </div>
+                    <div>
+                      <h5 class="font-label-md font-bold text-on-surface">
+                        Arabic Grammar (Nahwu)
+                      </h5>
+                      <p class="text-label-sm text-on-surface-variant">
+                        Class 10C • 10:30 AM • 38 Students
+                      </p>
+                    </div>
+                  </div>
+                  <span
+                    class="px-3 py-1 bg-secondary-container text-on-secondary-container text-label-sm rounded-full"
+                    >Draft</span
+                  >
+                </div>
+              </div>
+            </section>
+            <!-- Recent Questions -->
+            <section
+              class="bg-surface-container-lowest rounded-xl shadow-sm p-6"
+            >
+              <div class="flex justify-between items-center mb-6">
+                <h4
+                  class="font-headline-md text-on-surface flex items-center gap-2"
+                >
+                  <span class="material-symbols-outlined text-primary"
+                    >history_edu</span
+                  >
+                  Recent Question Additions
+                </h4>
+                <button class="text-primary font-label-sm hover:underline">
+                  Manage Bank
+                </button>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div
+                  class="p-4 border border-outline-variant rounded-lg hover:border-primary transition-colors cursor-pointer group"
+                >
+                  <div class="flex justify-between mb-2">
+                    <span
+                      class="text-[10px] font-bold text-primary-container bg-primary-fixed-dim/20 px-2 py-0.5 rounded"
+                      >MULTIPLE CHOICE</span
+                    >
+                    <span class="text-[10px] text-on-surface-variant"
+                      >2 hours ago</span
+                    >
+                  </div>
+                  <p class="text-body-md text-on-surface line-clamp-2 mb-3">
+                    Explain the core pillars of Islamic jurisprudence according
+                    to the Shafi'i school...
+                  </p>
+                  <div class="flex items-center gap-2 text-on-surface-variant">
+                    <span class="material-symbols-outlined text-sm">label</span>
+                    <span class="text-label-sm">Fiqh • Level 3</span>
+                  </div>
+                </div>
+                <div
+                  class="p-4 border border-outline-variant rounded-lg hover:border-primary transition-colors cursor-pointer group"
+                >
+                  <div class="flex justify-between mb-2">
+                    <span
+                      class="text-[10px] font-bold text-tertiary-container bg-tertiary-fixed/20 px-2 py-0.5 rounded"
+                      >ESSAY</span
+                    >
+                    <span class="text-[10px] text-on-surface-variant"
+                      >Yesterday</span
+                    >
+                  </div>
+                  <p class="text-body-md text-on-surface line-clamp-2 mb-3">
+                    Compare and contrast the literary style of pre-Islamic
+                    poetry with the early Islamic era...
+                  </p>
+                  <div class="flex items-center gap-2 text-on-surface-variant">
+                    <span class="material-symbols-outlined text-sm">label</span>
+                    <span class="text-label-sm">Adab • Level 5</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <!-- Right: Grading Queue -->
+          <div class="space-y-gutter">
+            <section
+              class="bg-surface-container-lowest rounded-xl shadow-sm border border-tertiary-container/20"
+            >
+              <div
+                class="p-6 bg-tertiary-container/5 rounded-t-xl border-b border-tertiary-container/10"
+              >
+                <h4
+                  class="font-headline-md text-tertiary flex items-center gap-2"
+                >
+                  <span class="material-symbols-outlined">grade</span>
+                  Grading Queue
+                </h4>
+                <p class="text-label-sm text-on-surface-variant mt-1">
+                  18 Essay questions require attention
+                </p>
+              </div>
+              <div class="p-6 space-y-4">
+                <!-- Queue Item 1 -->
+                <div
+                  class="p-4 bg-surface-container-low rounded-lg relative overflow-hidden group"
+                >
+                  <div
+                    class="absolute left-0 top-0 h-full w-1 bg-tertiary"
+                  ></div>
+                  <h5 class="font-label-md font-bold text-on-surface">
+                    Aqidah Al-Awam Quiz
+                  </h5>
+                  <p class="text-label-sm text-on-surface-variant mt-1">
+                    8 Students submitted
+                  </p>
+                  <div class="mt-3 flex justify-between items-center">
+                    <div class="flex -space-x-2">
+                      <img
+                        alt="Student"
+                        class="w-6 h-6 rounded-full ring-2 ring-surface"
+                        data-alt="Close up face of a young student with a focused and academic expression, representing the diverse student body of a modern educational institution."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOOpGJV_-6mKWxtv-EkndKldVprqMbDxUpq2c9vCIEnECl5xGn_32LklkMPHswWY3tLhrBB_U5l_m-a-A9UT2x_zasd2YI7n84855LLfzXjQJOH1AtFRCJJyHq3Vdr3H0ihpST9D0wCxqtyyC6s-8HuEhprwxIGhab3DvNNtzuE_RlbSE7_PYiZYz1vU12c5hh-5sb5oOTnzlYctCnvgNjAQz67cnLZAa36nwGdsB0_khX-j4VnPJgd6nvQaubHDBTXcJmPCKNThEH"
+                      />
+                      <img
+                        alt="Student"
+                        class="w-6 h-6 rounded-full ring-2 ring-surface"
+                        data-alt="Portrait of a diligent male student in a scholarly environment, captured with soft natural lighting and a clean, academic aesthetic."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGn01FsPoIwLMQ1VSTkkbe4eB0_Xft9_vXy3-khRoac7Oj-QdkCfBTTDQiNwUo9XXRqgK-s8bj-1dv17WijSo2vydyaujONMwx0CEfDN0aDHrgc3pqbjzgbgk0rzFurITYVIg0ooPGSHuHPt6xlv6QKkjJWBRI0QPntrrSF82tACpTxe6HNZqIe2hJfETLR45RzbJYoHBoG9APatKx_7zgof1X8_CAGeUwg2cBPGg_yywk0j7V5UMKj6BL6u4lgITqgYA9-LkWE_N5"
+                      />
+                      <div
+                        class="w-6 h-6 rounded-full bg-surface-container-high ring-2 ring-surface flex items-center justify-center text-[8px] font-bold"
+                      >
+                        +6
+                      </div>
+                    </div>
+                    <button
+                      class="bg-tertiary text-white text-label-sm px-4 py-1.5 rounded-lg hover:bg-tertiary-container transition-colors"
+                    >
+                      Grade Now
+                    </button>
+                  </div>
+                </div>
+                <!-- Queue Item 2 -->
+                <div
+                  class="p-4 bg-surface-container-low rounded-lg relative overflow-hidden group"
+                >
+                  <div
+                    class="absolute left-0 top-0 h-full w-1 bg-tertiary"
+                  ></div>
+                  <h5 class="font-label-md font-bold text-on-surface">
+                    Hadith Terminologies
+                  </h5>
+                  <p class="text-label-sm text-on-surface-variant mt-1">
+                    10 Students submitted
+                  </p>
+                  <div class="mt-3 flex justify-between items-center">
+                    <div class="flex -space-x-2">
+                      <img
+                        alt="Student"
+                        class="w-6 h-6 rounded-full ring-2 ring-surface"
+                        data-alt="Detailed portrait of a young female student with a bright, curious expression, set against a blurred academic background to emphasize the user-focused digital madrasah environment."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwleOlAU51mbCCQcfe-iFO5iNb0nHJUgVwZNAFqqQhnhg0SgpEsjZpinQd9QuxM1d6Y0LJb6ANmeLYe0orG_Zx013fk50lJ6WNaqwxjVFREbUtcJ0L_I2Vyg8IbaSUfnyB_lpnuo6YJtdP_5GRYjacWEcSpt1KnLDsMlLYQ5LA6rztjc3yrLyrx2OS5vx5cdT6aC-_5lHkvrJ-WeuL-VPQf-7e0bm7Z7-tJqRWEwyWoJaGlUBBEZLE5fX91KWrUfT2ruCs6l3RmXv3"
+                      />
+                      <img
+                        alt="Student"
+                        class="w-6 h-6 rounded-full ring-2 ring-surface"
+                        data-alt="A clean, professional headshot of a student engaged in learning, characterized by soft directional light and a professional minimalist color palette consistent with the educational brand."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZuDiABlF7VgYGqmiBQ2QIlaOXaq7Fn_FPdNBnqNj4SFbygIFk6Var2A63fWbQEQY_GsFWf8I5NMGXWa7bwtVjue4DP97jkLUTzW5NRlcEt6_SEsIkMraJyYTtvBI8SzwOxUtMmRA42Op5LLhM67D9B2BXrjH9NPyI54TGB3D9uAUjCOFUffsm3Oq4jmuIcbqc78jwAEZ4bQot4LWFhZ8ipkEB9aJzA_DLTCLwr_JPmCPoMulwA-z9ttb0jHqN6C1UU9m8XafVcHg5"
+                      />
+                      <div
+                        class="w-6 h-6 rounded-full bg-surface-container-high ring-2 ring-surface flex items-center justify-center text-[8px] font-bold"
+                      >
+                        +8
+                      </div>
+                    </div>
+                    <button
+                      class="bg-tertiary text-white text-label-sm px-4 py-1.5 rounded-lg hover:bg-tertiary-container transition-colors"
+                    >
+                      Grade Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="p-6 bg-surface-container-low/50 text-center">
+                <button
+                  class="text-on-surface-variant font-label-md hover:text-primary transition-colors"
+                >
+                  View All Submissions
+                </button>
+              </div>
+            </section>
+            <!-- Quick Resources Card -->
+            <section
+              class="bg-primary-container text-on-primary-container p-6 rounded-xl shadow-lg relative overflow-hidden"
+            >
+              <div class="relative z-10">
+                <h4 class="font-headline-md mb-2">Teacher Resources</h4>
+                <p class="text-label-md mb-6 opacity-90">
+                  Access the latest teaching guides and syllabus templates.
+                </p>
+                <div class="space-y-3">
+                  <a
+                    class="flex items-center gap-3 bg-white/10 hover:bg-white/20 p-3 rounded-lg transition-colors"
+                    href="#"
+                  >
+                    <span class="material-symbols-outlined">description</span>
+                    <span class="text-label-sm">2023 Exam Guidelines.pdf</span>
+                  </a>
+                  <a
+                    class="flex items-center gap-3 bg-white/10 hover:bg-white/20 p-3 rounded-lg transition-colors"
+                    href="#"
+                  >
+                    <span class="material-symbols-outlined">folder_open</span>
+                    <span class="text-label-sm">Fiqh Curriculum Assets</span>
+                  </a>
+                </div>
+              </div>
+              <!-- Abstract Pattern Accent -->
+              <div
+                class="absolute -right-10 -bottom-10 opacity-20 transform rotate-12"
+              >
+                <span class="material-symbols-outlined text-[120px]"
+                  >school</span
+                >
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
