@@ -16,7 +16,20 @@ export async function GET(req: NextRequest) {
   const limit = Math.min(50, Number(searchParams.get('limit') ?? '20'));
   const skip = (page - 1) * limit;
 
-  const where = status ? { status: status as never } : {};
+  // GURU: restrict to assigned subjects only
+  let subjectFilter: string[] | undefined;
+  if (session.user.role === 'GURU') {
+    const assignments = await prisma.userSubject.findMany({
+      where: { userId: session.user.id },
+      select: { subjectId: true },
+    });
+    subjectFilter = assignments.map((a) => a.subjectId);
+  }
+
+  const where = {
+    ...(status ? { status: status as never } : {}),
+    ...(subjectFilter ? { subjectId: { in: subjectFilter } } : {}),
+  };
   const [exams, total] = await Promise.all([
     prisma.exam.findMany({
       where,

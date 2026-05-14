@@ -25,7 +25,7 @@ async function main() {
     create: { email: 'guru.fiqh@madrasah.test', fullName: 'Ustadz Ahmad Fauzi', passwordHash, role: Role.GURU },
   });
 
-  await prisma.user.upsert({
+  const guru2 = await prisma.user.upsert({
     where: { email: 'guru.quran@madrasah.test' },
     update: {},
     create: { email: 'guru.quran@madrasah.test', fullName: 'Ustadzah Siti Aminah', passwordHash, role: Role.GURU },
@@ -95,6 +95,23 @@ async function main() {
     where: { name: 'Aqidah Akhlak' },
     update: {},
     create: { name: 'Aqidah Akhlak', description: 'Tauhid, aqidah Islam, dan akhlak mulia' },
+  });
+
+  // ─── Assign Guru ke Mapel ────────────────────────────────────────────────────
+  await prisma.userSubject.upsert({
+    where: { userId_subjectId: { userId: guru1.id, subjectId: fiqh.id } },
+    update: {},
+    create: { userId: guru1.id, subjectId: fiqh.id },
+  });
+  await prisma.userSubject.upsert({
+    where: { userId_subjectId: { userId: guru1.id, subjectId: aqidah.id } },
+    update: {},
+    create: { userId: guru1.id, subjectId: aqidah.id },
+  });
+  await prisma.userSubject.upsert({
+    where: { userId_subjectId: { userId: guru2.id, subjectId: quran.id } },
+    update: {},
+    create: { userId: guru2.id, subjectId: quran.id },
   });
 
   // ─── Soal Fiqh (MC + Essay) ─────────────────────────────────────────────────

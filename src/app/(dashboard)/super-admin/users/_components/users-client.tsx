@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Users, GraduationCap, BookUser, ShieldCheck, Upload, Download, UserPlus, ChevronLeft, ChevronRight, MoreVertical, X, Trash2 } from 'lucide-react';
+import { Users, GraduationCap, BookUser, ShieldCheck, Upload, Download, UserPlus, ChevronLeft, ChevronRight, MoreVertical, X, Trash2, BookOpen } from 'lucide-react';
 import { useUsers, useCreateUser, useDeleteUser, type UserRow } from '@/features/users/hooks/use-users';
 import { useClasses } from '@/features/classes/hooks/use-classes';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 type Tab = 'SANTRI' | 'GURU' | 'PENGAWAS';
 
@@ -46,6 +48,101 @@ function TableSkeleton() {
   return (
     <div className="space-y-3 p-4">
       {[1, 2, 3, 4].map(i => <div key={i} className="h-14 bg-surface-container rounded-xl animate-pulse" />)}
+    </div>
+  );
+}
+
+interface Subject { id: string; name: string }
+
+function useSubjects() {
+  return useQuery<Subject[]>({
+    queryKey: ['subjects-all'],
+    queryFn: async () => {
+      const res = await fetch('/api/subjects');
+      const json = await res.json();
+      return (Array.isArray(json.data) ? json.data : json.data?.subjects ?? []) as Subject[];
+    },
+  });
+}
+
+function useGuruSubjects(userId: string, enabled: boolean) {
+  return useQuery<Subject[]>({
+    queryKey: ['guru-subjects', userId],
+    queryFn: async () => {
+      const res = await fetch(`/api/users/${userId}/subjects`);
+      const json = await res.json();
+      return json.data ?? [];
+    },
+    enabled,
+  });
+}
+
+function useAssignSubjects(userId: string) {
+  return useMutation({
+    mutationFn: async (subjectIds: string[]) => {
+      const res = await fetch(`/api/users/${userId}/subjects`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subjectIds }),
+      });
+      const json = await res.json();
+      if (!json.success) throw new Error(json.message);
+      return json.data;
+    },
+    onSuccess: () => toast.success('Mapel berhasil diperbarui'),
+    onError: (e: Error) => toast.error(e.message),
+  });
+}
+
+function AssignSubjectsModal({ user, onClose }: { user: UserRow; onClose: () => void }) {
+  const { data: allSubjects = [] } = useSubjects();
+  const { data: assigned = [], isLoading } = useGuruSubjects(user.id, true);
+  const [selected, setSelected] = useState<string[]>([]);
+  const assignMutation = useAssignSubjects(user.id);
+
+  // Sync once assigned loaded
+  useState(() => { setSelected(assigned.map((s) => s.id)); });
+  // Re-sync when assigned changes
+  const [synced, setSynced] = useState(false);
+  if (!isLoading && !synced && assigned.length >= 0) {
+    setSelected(assigned.map((s) => s.id));
+    setSynced(true);
+  }
+
+  const toggle = (id: string) => setSelected((p) => p.includes(id) ? p.filter((x) => x !== id) : [...p, id]);
+
+  const save = () => assignMutation.mutate(selected, { onSuccess: onClose });
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+      <div className="bg-surface-container-lowest rounded-2xl shadow-2xl w-full max-w-md p-8">
+        <div className="flex justify-between items-center mb-2">
+          <h3 className="text-lg font-bold text-on-surface">Assign Mata Pelajaran</h3>
+          <button onClick={onClose} className="p-2 rounded-full hover:bg-surface-container transition-colors">
+            <X className="w-5 h-5 text-on-surface-variant" />
+          </button>
+        </div>
+        <p className="text-sm text-on-surface-variant mb-6">{user.fullName}</p>
+        {isLoading ? (
+          <div className="space-y-2">{[1,2,3].map(i => <div key={i} className="h-12 bg-surface-container animate-pulse rounded-lg" />)}</div>
+        ) : (
+          <div className="space-y-2 mb-6">
+            {allSubjects.map((s) => (
+              <label key={s.id} className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${selected.includes(s.id) ? 'border-primary bg-primary/5' : 'border-outline-variant/30 hover:border-primary/40'}`}>
+                <input type="checkbox" checked={selected.includes(s.id)} onChange={() => toggle(s.id)} className="w-4 h-4 accent-primary" />
+                <BookOpen className="w-4 h-4 text-primary flex-shrink-0" />
+                <span className="text-sm font-medium text-on-surface">{s.name}</span>
+              </label>
+            ))}
+          </div>
+        )}
+        <div className="flex gap-3">
+          <button onClick={onClose} className="flex-1 h-11 rounded-xl border border-outline-variant text-sm font-semibold text-on-surface-variant hover:bg-surface-container">Batal</button>
+          <button onClick={save} disabled={assignMutation.isPending} className="flex-1 h-11 bg-primary text-white rounded-xl text-sm font-bold hover:brightness-110 disabled:opacity-70">
+            {assignMutation.isPending ? 'Menyimpan…' : 'Simpan'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -138,6 +235,7 @@ export function UsersClient() {
   const [tab, setTab] = useState<Tab>('SANTRI');
   const [page, setPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
+  const [assignUser, setAssignUser] = useState<UserRow | null>(null);
 
   const { data, isLoading } = useUsers({ role: tab, page });
   const deleteUser = useDeleteUser();
@@ -155,6 +253,7 @@ export function UsersClient() {
   return (
     <div className="space-y-8">
       <CreateUserModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      {assignUser && <AssignSubjectsModal user={assignUser} onClose={() => setAssignUser(null)} />}
 
       <div className="flex flex-col md:flex-row justify-between items-end gap-4">
         <div>
@@ -240,6 +339,15 @@ export function UsersClient() {
                     </td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-1">
+                        {u.role === 'GURU' && (
+                          <button
+                            onClick={() => setAssignUser(u)}
+                            title="Assign Mapel"
+                            className="text-on-surface-variant hover:text-primary p-2 rounded-full transition-colors"
+                          >
+                            <BookOpen className="w-4 h-4" />
+                          </button>
+                        )}
                         <button className="text-on-surface-variant hover:text-primary p-2 rounded-full transition-colors"><MoreVertical className="w-5 h-5" /></button>
                         <button onClick={() => deleteUser.mutate(u.id)} className="text-on-surface-variant hover:text-error p-2 rounded-full transition-colors"><Trash2 className="w-4 h-4" /></button>
                       </div>

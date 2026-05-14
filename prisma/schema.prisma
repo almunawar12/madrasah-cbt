@@ -61,9 +61,10 @@ model User {
   createdAt    DateTime   @default(now()) @map("created_at")
   updatedAt    DateTime   @updatedAt @map("updated_at")
 
-  examSessions ExamSession[]
-  answers      Answer[]
-  auditLogs    AuditLog[]
+  examSessions     ExamSession[]
+  answers          Answer[]
+  auditLogs        AuditLog[]
+  assignedSubjects UserSubject[]
 
   @@index([role])
   @@index([status])
@@ -91,8 +92,20 @@ model Subject {
 
   questions   Question[]
   exams       Exam[]
+  teachers    UserSubject[]
 
   @@map("subject")
+}
+
+model UserSubject {
+  userId    String   @map("user_id")
+  subjectId String   @map("subject_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@id([userId, subjectId])
+  @@map("user_subject")
 }
 
 model Question {

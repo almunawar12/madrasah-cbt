@@ -19,13 +19,21 @@ interface EssayAnswer {
   };
 }
 
-function useFinishedExams() {
+function useGradableExams() {
   return useQuery<ExamRow[]>({
-    queryKey: ['exams-finished'],
+    queryKey: ['exams-gradable'],
     queryFn: async () => {
-      const res = await fetch('/api/exams?status=FINISHED');
-      const json = await res.json();
-      return json.data?.exams ?? [];
+      // Fetch semua exam (published, ongoing, finished) — API sudah filter by assigned subjects untuk GURU
+      const [r1, r2, r3] = await Promise.all([
+        fetch('/api/exams?status=PUBLISHED').then(r => r.json()),
+        fetch('/api/exams?status=ONGOING').then(r => r.json()),
+        fetch('/api/exams?status=FINISHED').then(r => r.json()),
+      ]);
+      return [
+        ...(r1.data?.exams ?? []),
+        ...(r2.data?.exams ?? []),
+        ...(r3.data?.exams ?? []),
+      ] as ExamRow[];
     },
   });
 }
@@ -139,7 +147,7 @@ export function GradingClient() {
   const [selectedExamId, setSelectedExamId] = useState('');
   const [filter, setFilter] = useState<'all' | 'ungraded' | 'graded'>('all');
 
-  const { data: exams, isLoading: examsLoading } = useFinishedExams();
+  const { data: exams, isLoading: examsLoading } = useGradableExams();
   const { data: answers, isLoading: answersLoading } = useEssayAnswers(selectedExamId);
 
   const filtered = (answers ?? []).filter((a) => {
@@ -169,10 +177,15 @@ export function GradingClient() {
             onChange={(e) => setSelectedExamId(e.target.value)}
             className="h-11 px-4 rounded-lg border border-outline-variant bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
           >
-            <option value="">— Pilih Ujian Selesai —</option>
-            {exams?.map((e) => (
-              <option key={e.id} value={e.id}>{e.title}</option>
-            ))}
+            <option value="">— Pilih Ujian —</option>
+            {exams?.map((e) => {
+              const statusLabel: Record<string, string> = { PUBLISHED: 'Aktif', ONGOING: 'Berlangsung', FINISHED: 'Selesai' };
+              return (
+                <option key={e.id} value={e.id}>
+                  {e.title} — {e.subject.name} [{statusLabel[e.status] ?? e.status}]
+                </option>
+              );
+            })}
           </select>
         )}
         {totalCount > 0 && (
